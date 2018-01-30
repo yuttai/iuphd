@@ -1,0 +1,206 @@
+\chapter{Documentation}
+
+This pdf doubles as documentation for the iuphd.cls file, and as a sample for the output.
+The iuphd class is based on the standard \LaTeX \ report class, and as such you may assume that it follows
+the default formatting of the report class unless otherwise specified below.  The
+changes to the report class include the following:
+
+\begin{itemize}
+ \item changes to the default settings for margins, font size (11pt), spacing (double), and pagination,
+ \item the quote, quotation, and verse environments have been changed to switch temporarily to single spacing, and
+       remove the extra space at the top and bottom,
+ \item the enumerate and itemize environments have been changed to remove extra space between the items and at the
+       top and bottom,
+ \item a line has been added to prevent the double spacing from affecting arrays,
+ \item both numbered and unnumbered chapter headings are now centered by default,
+ \item heading names such as CHAPTER, and BIBLIOGRAPHY are now all caps by default regardless of how they are typed,
+ \emph{(This is accomplished with the help of textcase.sty.  Not all latex distributions come with this by default.)}
+ \item changes to the definitions of \textbackslash maketitle and the `abstract' environment,
+ \item the addition of commands for creating the acceptance page and copyright page,
+ \item the addition of the `acknowledgments', `preface', and `dedication' environments,
+ \item the addition of macros for specifying the department or school name, the names of
+ the committee members, the defense date, and the copyright year,
+ \item document class options for changing ``Department'' to ``School'' on the title page, and for showing
+ the abstract, preface, acknowledgments, or dedication in the table of contents.
+\end{itemize}
+
+The appropriate commands for using these features are already typed into the dissertation.tex sample file,
+with the optional items (dedication, preface, and copyright) commented out.  Simply remove the \% from the front
+of these optional commands if you wish to use them.  The headings for the acknowledgments, preface, and dedication have
+been defined as unnumbered chapter headings, which means they will not show up in the table of contents by default.
+See the instructions below for adding them to the table of contents if desired.
+
+\section{Current Standards at IU}
+The current version of iuphd.cls complies with the standards of formatting a dissertation at IU as of 2013.  Below is a discussion of
+some of the main points.
+
+The current pagination standard is for the page number to appear centered at the top or bottom of the
+page, and to use lowercase roman numerals for the material preceding the first chapter with the title page unnumbered but counting as
+page one. The only part of this that is not standard in the \LaTeX \ report class is the use of roman numerals, which was accomplished
+by changing the definitions to \textbackslash maketitle and \textbackslash tableofcontents.
+
+The current standard for chapter headings seems to be that they are centered and in all caps.  The iuphd.cls enforces these
+conventions automatically, however it is possible to override these changes with titlesec and titletoc. Because the textcase package is used,
+the capitalization is not affected in math mode, so for instance
+\medskip
+
+\textbackslash section\{\$p\$-adic numbers\}
+\medskip
+
+\noindent will give the output ``$p$-ADIC NUMBERS'' in both the section heading and in the table of contents
+(unless the value of \textbackslash tocdepth is changed to prevent sections from being listed in the table of contents).
+Since all caps takes up more space horizontally than mixed upper and lowecase text, the size of the chapter headings
+has been reduced to \textbackslash LARGE from \textbackslash huge.  However, no changes have been made to the size of any of the
+other headings in the report class.
+
+Most dissertations are one-sided, with an additional half inch added to the left hand margin on each page for the purpose of binding.
+Although this is the standard, they do allow for the possibility of two-sided printing, which would cause the side with the extra margin
+to alternate for binding.  This is automatically enforced simply by using the twoside option (a feature already built into the
+standard report class). This is done as follows:
+\medskip
+
+\textbackslash documentclass[twoside]\{iuphd\}
+\medskip
+
+There does not seem to be a standard about whether the abstract, preface, acknowledgments, and dedication are listed in the table of
+contents (TOC) or not.  As such, an option has been provided for including or excluding each one individually.  The syntax for these options
+follows the pattern `showX' if X is to be listed in the TOC, and 'hideX' if X is to be omitted from the TOC, where X can be any of the four
+items listed above.  In all cases, the default is for these \emph{not} to have entries in the table of contents.  So for example, to include
+both the abstract and the preface in the table of contents, but not the dedication or acknowledgments, you would use the code:
+\medskip
+
+\textbackslash documentclass[showabstract,showpreface]\{iuphd\}
+\medskip
+
+\noindent To include a line for the bibliography in the table of contents, the command
+\medskip
+
+\textbackslash addcontentsline\{toc\}\{chapter\}\{BIBLIOGRAPHY\}
+\medskip
+
+\noindent should be placed directly above the \textbackslash bibliography and \textbackslash bibliographystyle commands.  It may be necessary
+to use \textbackslash clearpage above this command to get the page number displayed in the contents to be correct.  However, if you are using
+\textbackslash include for each chapter, then \textbackslash clearpage has technically already been used in this case, and so it is not
+necessary to use it again. Similar commands will work for including any unnumbered heading in the table of contents, with careful attention
+to the effects of \textbackslash clearpage.
+
+Various commands have been defined for the data that will show up on the title page, acceptance page, and copyright page.  These include:
+\begin{itemize}
+ \item \textbackslash title - for the title of the dissertation
+ \item \textbackslash author - for the name of the author of the dissertation
+ \item \textbackslash date - for the \emph{completion date} of the dissertation
+ \item \textbackslash department - this is optional.  The default value is ``Mathematics,'' but if you are in a different department, this
+        command can be used to change its value to the name of whatever department (or school) you are in.  
+ \item \textbackslash committeechair, \textbackslash readertwo, \textbackslash readerthree, \textbackslash readerfour - for the names of the
+                      dissertation committee members.
+ \item \textbackslash defensedate - for the \emph{defense date} of the dissertation (which may not match the completion date).
+ \item \textbackslash cryear - for the copyright year.
+\end{itemize}
+
+Additionally the commands \textbackslash acceptancepage and \textbackslash copyrightpage have been defined to generate the acceptance page and copyright page
+respectively.  The copyright page is not required, so it has been commented out of my dissertation.tex sample file.  Two document class options have been provided
+for switching the text on the title page between ``Department'' and ``School.''  These options are given the obvious names `department' and `school'. The
+default option is `department', so it only needs to be changed if you are in a school rather than a department.
+
+A CV is also required following the bibliography, however, to maintain maximum flexibility I have not provided any special tools for
+formatting a CV.  Various packages are available that do this, although I prefer custom formatting. As such, I have provided only a
+line for including the CV after the bibliography, which is currently commented out.
+
+
+
+\section{Suggestions for additional formatting}
+
+For longer documents, it is often easier to manage if it is broken into multiple files.  This can be done by using the
+\textbackslash include\{filename\} or \textbackslash input\{filename\} commands.  You can think of
+\textbackslash input\{filename\} as an alias for all of the text contained in filename.tex: the text contained in that file,
+simply gets inserted at the exact spot where the command \textbackslash input is used.  This means that filename.tex should not have
+\textbackslash begin\{document\}, \textbackslash end\{document\}, or a preamble, as illustrated by iuphd-doc.tex in this example.
+On the other hand, \textbackslash include\{filename\} has the additional feature of adding \textbackslash clearpage both before and after
+the text being inserted.  This has important consequences for formatting.  Say that you have a file for each chapter,
+and your first chapter is the introduction.  If you do something like this:
+\medskip
+
+\textbackslash chapter\{Introduction\}
+
+\textbackslash include\{chap1\}
+\medskip
+
+\noindent then the title is formatted on its own page, and the text in chap1.tex will start on a new page; it produces
+the same result as
+\medskip
+
+\textbackslash chapter\{Introduction\}
+
+\textbackslash clearpage
+
+\textbackslash input\{chap1\}
+\medskip
+
+\noindent To avoid having the title put on a separate page there are two options: use input instead of include
+(without \textbackslash clearpage), or use the command \textbackslash chapter\{INTRODUCTION\} inside the file chap1.tex.
+I favor the second option as illustrated in this example with iuphd-doc.tex.
+
+Many \LaTeX \ packages are already available for additional customization of the formatting which is otherwise built in.
+Some of these are listed below.  To use them, simply declare them with \textbackslash usepackage in the preamble
+and refer to the documentation files for them, which are easily available online.
+
+\begin{itemize}
+ \item titlesec - for custom formatting of part, chapter, and section headings.
+ \item titletoc or tocloft - for custom formatting of the table of contents.
+ \item nomencl - for lists of notation (a tweak of makeindex).
+ \item prettyref - for custom formatting of references (e.g. referencing equations as (1), (2), etc., instead of the default
+       1, 2, etc.).  The ams packages also have a similar feature but it is much more limited.
+ \item natbib, custom-bib, or biblatex - offer additional flexibility for bibliography formatting beyond the standard used by
+       the mathematics community.
+ \item setspace - contains features for resetting the global line spacing, as well as environments that can be used to change
+       spacing locally, which are compatible with the quote, quotation, and verse environments.
+ \item quoting - provides a more flexible quotation environment, with options for adjusting the margins manually.  This package
+     should be used with setspace, to ensure single spacing of the quotations.
+ \item enumitem or paralist - provide several more flexible list environments.
+ \item titling - for custom changes to maketitle.
+ \item geometry - for customizing the page layout.
+\end{itemize}
+
+%add features for block quotes, underlined titles, and different departments.
+
+The last two should not be necessary unless the standards at IU change.  However, if that happens, it would really be better to
+rewrite the iuphd document class.  Additional packages and other useful information can be found in \cite{mittelbach2004latex}.
+
+\section{quote samples}
+The quote environment:
+\begin{quote}
+``God does not play dice with the universe.'' - Albert Einstein
+\end{quote}
+The quotation environment:
+\begin{quotation}
+ ``A GREAT discovery solves a great problem, but there is a grain of discovery in the solution of any problem.
+ Your problem may be modest, but if it challenges your curiosity and brings into play your inventive faculties,
+ and if you solve it by your own means, you may experience the tension and enjoy the triumph of discovery.''
+ 
+ - George P\'olya
+\end{quotation}
+The verse environment:
+\begin{verse}
+Im September ist alles aus Gold:\\ 
+die Sonne, die durch das Blau hinrollt,\\
+das Stoppelfeld,\\
+die Sonnenblume, schläfrig am Zaun,\\
+das Kreuz auf der Kirche,\\
+der Apfel im Baum.\\
+Ob er h\"alt,\\
+ob er f\"allt? \\
+Da wirft ihn geschwind\\
+der Wind\\
+in die goldene Welt.
+
+- Georg Britting
+\end{verse}
+
+\section{Troubleshooting}
+
+If you are getting an error with the TOC, you may have at least one of the following two problems:
+\begin{enumerate}
+ \item you do not have textcase.sty in your latex distribution,
+ \item you compiled a previous *.toc file with a different latex class (e.g. the amsbook class).
+\end{enumerate}
+Make sure you have textcase.sty, delete the *.toc file, and recompile.

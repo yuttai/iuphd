@@ -1,0 +1,59 @@
+\documentclass{iuphd}
+\usepackage[utf8]{inputenc}
+\usepackage{cite}
+
+%data for Title Page
+\title{Dissertation Title}
+\author{Author}
+\date{Completion Date}
+
+%data for Acceptance Page
+\committeechair{Committee Chair}
+\readertwo{2nd Reader}
+\readerthree{3rd Reader}
+\readerfour{4th Reader}
+\defensedate{Defense Date}
+
+
+%data for Copyright Page
+\cryear{Current Year}
+
+\begin{document}
+\maketitle
+
+\acceptancepage
+
+\copyrightpage
+
+%\begin{dedication}
+%\end{dedication}
+
+\begin{acknowledgments}
+The acknowledgments are designed to recognize people or agencies to whom you feel grateful for any academic,
+technical, financial, or personal aid in the preparation of your thesis or dissertation; as a matter of
+courtesy, you would ordinarily mention the members of your committee here, as well as institutions that
+provided funding, your typist, or anyone else who helped.
+\end{acknowledgments}
+
+%\begin{preface}
+%\end{preface}
+
+\begin{abstract}
+ The abstract is double-spaced and limited to 350 words. As many people will learn about
+your work through your abstract published in Dissertation Abstracts (http://proquest.umi.com/login),
+you should spend a good bit of effort in the composition of both the abstract and the title of your work.
+Try to convey the flavor of your work, not just the bare bones of your findings; in an average abstract
+there will be about 70 characters per line with a maximum of 35 lines. You should also work to phrase your
+title so that it truly describes the contents and will be easily found in the index of Dissertation Abstracts.
+The index is based on key words, so be as specific as you can be about your subject. 
+\end{abstract}
+
+\tableofcontents
+
+\include{iuphd-doc}
+
+\bibliographystyle{plain}
+\bibliography{dissertation}
+
+%\include{CV}
+\end{document}
