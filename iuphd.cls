@@ -308,44 +308,28 @@ Indiana University\\ \@date \par}
     }
 
 %%%%Begin Acceptance Page Definition
-\newcommand*{\@committeechair}{}
-\newcommand*{\committeechair}[1]{\renewcommand*{\@committeechair}{#1}}
-\newcommand*{\@readertwo}{}
-\newcommand*{\readertwo}[1]{\renewcommand*{\@readertwo}{#1}}
-\newcommand*{\@readerthree}{}
-\newcommand*{\readerthree}[1]{\renewcommand*{\@readerthree}{#1}}
-\newcommand*{\@readerfour}{}
-\newcommand*{\readerfour}[1]{\renewcommand*{\@readerfour}{#1}}
+\RequirePackage{xparse} % Use to let acceptancepage has optional argument.
+\newcommand*{\@commiteeMember}[1]{\hfill #1\vfill}
 \newcommand*{\@defensedate}{}
 \newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
-
-\newcommand\acceptancepage{\begin{centeredpage}%
+\NewDocumentCommand{\acceptancepage}{m m m m o o}{\begin{centeredpage}%
 \vspace{-0.5\baselineskip}
 \begin{center}
  Accepted by the Graduate Faculty, Indiana University, in partial fulfillment
  of the requirements for the degree of Doctor of Philosophy.\par
 \end{center}
 Doctoral Committee
-\vspace{3\baselineskip}
+\vfill
 
-\hfill \@committeechair
-\vspace{3\baselineskip}
-
-\hfill \@readertwo
-\vspace{3\baselineskip}
-
-\hfill \@readerthree
-\vspace{3\baselineskip}
-
-\hfill \@readerfour
-\vspace{3\baselineskip}
+\@commiteeMember{#1}
+\@commiteeMember{#2}
+\@commiteeMember{#3}
+\@commiteeMember{#4}
+\IfNoValueF{#5}{\@commiteeMember{#5}}
+\IfNoValueF{#6}{\@commiteeMember{#6}}
 
 \@defensedate\par
 \end{centeredpage}%
-  \global\let\committeechair\relax
-  \global\let\readertwo\relax
-  \global\let\readerthree\relax
-  \global\let\readerfour\relax
   \global\let\defensedate\relax
 }
 %%%%End Acceptance Page Definition

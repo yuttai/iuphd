@@ -1,3 +1,7 @@
 /dissertation.pdf
-/dissertation.synctex.gz
+/*.synctex.gz
 /tmp/
+/*.log
+/*.toc
+/*.aux
+/*.bak

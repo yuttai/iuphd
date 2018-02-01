@@ -2,27 +2,21 @@
 \usepackage[utf8]{inputenc}
 \usepackage{cite}
 
-%data for Title Page
+\begin{document}
+
+% Title Page
 \title{Dissertation Title}
 \author{Author}
 \date{Completion Date}
-
-%data for Acceptance Page
-\committeechair{Committee Chair}
-\readertwo{2nd Reader}
-\readerthree{3rd Reader}
-\readerfour{4th Reader}
-\defensedate{Defense Date}
-
-
-%data for Copyright Page
-\cryear{Current Year}
-
-\begin{document}
 \maketitle
 
-\acceptancepage
+% Acceptance Page
+\defensedate{Defense Date}
+% \acceptancepage{Committee Chair}{2nd Reader}{3rd Reader}{4th Reader}
+\acceptancepage{Co-Chair}{Co-Chair}{3rd Reader}{4th Reader}[5th Reader]% [6th Reader]
 
+% Copyright Page
+\cryear{Current Year}
 \copyrightpage
 
 %\begin{dedication}
