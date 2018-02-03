@@ -20,7 +20,7 @@ changes to the report class include the following:
  \item the addition of the `acknowledgments', `preface', and `dedication' environments,
  \item the addition of macros for specifying the department or school name, the names of
  the committee members, the defense date, and the copyright year,
- \item document class options for changing ``Department'' to ``School'' on the title page, and for showing
+ \item document class options for showing
  the abstract, preface, acknowledgments, or dedication in the table of contents.
 \end{itemize}
 
@@ -89,17 +89,16 @@ Various commands have been defined for the data that will show up on the title p
  \item \textbackslash title - for the title of the dissertation
  \item \textbackslash author - for the name of the author of the dissertation
  \item \textbackslash date - for the \emph{completion date} of the dissertation
- \item \textbackslash department - this is optional.  The default value is ``Mathematics,'' but if you are in a different department, this
-        command can be used to change its value to the name of whatever department (or school) you are in.  
  \item \textbackslash defensedate - for the \emph{defense date} of the dissertation (which may not match the completion date).
  \item \textbackslash cryear - for the copyright year.
 \end{itemize}
 
+\textbackslash maketitle now takes two optional arguments representing your major(s).  The default value of the first argument is ``Department of Mathematics,'' but if you are in a different department, this
+can be changed the name of whatever department (or school) you are in.  The second argument represents your second major if you are double-major.  Notice that the university graduate school doesn't specify the format for writing departments for double-major students~\cite{DoctoralFormatting2018}.  Different students use different formats \cite{Hansen2015,Agmon2016,Bambach2016}, and we follow the majority of recently accepted format.  If you are triple-major, please follow xparse document to see how to add more arguments for \textbackslash maketitle~\cite{xparse}.
+
 Additionally the commands \textbackslash acceptancepage and \textbackslash copyrightpage have been defined to generate the acceptance page and copyright page
-respectively.  Arguments of \textbackslash acceptancepage are the names of the dissertation committee members, where users must provides $4$ committee members, and could input up to $6$ committee members. If your  committee members is more than $6$, please follow xparse document to see how to add more arguments for \textbackslash acceptancepage~\cite{xparse}.
-The copyright page is not required.  Two document class options have been provided
-for switching the text on the title page between ``Department'' and ``School.''  These options are given the obvious names `department' and `school'. The
-default option is `department', so it only needs to be changed if you are in a school rather than a department.
+respectively.  Arguments of \textbackslash acceptancepage are the names of the dissertation committee members, where users must provides $4$ committee members, and could input up to $6$ committee members. If your committee members is more than $6$, please follow xparse document to see how to add more arguments for \textbackslash acceptancepage~\cite{xparse}.
+The copyright page is not required.
 
 A CV is also required following the bibliography, however, to maintain maximum flexibility I have not provided any special tools for
 formatting a CV.  Various packages are available that do this, although I prefer custom formatting. As such, I have provided only a

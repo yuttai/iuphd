@@ -9,9 +9,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{textcase}
-\newif\if@school
-\DeclareOption{school}{\@schooltrue}
-\DeclareOption{department}{\@schoolfalse}
 \newif\if@preface
 \DeclareOption{showpreface}{\@prefacetrue}
 \DeclareOption{hidepreface}{\@prefacefalse}
@@ -91,7 +88,7 @@
       }%
    \renewcommand\newblock{\par}}%
 }
-\ExecuteOptions{letterpaper,11pt,oneside,onecolumn,final,openany,department,hideabstract,hideacknowlegments,hidededication,hidepreface}
+\ExecuteOptions{letterpaper,11pt,oneside,onecolumn,final,openany,hideabstract,hideacknowlegments,hidededication,hidepreface}
 \ProcessOptions
 \input{size1\@ptsize.clo}
  %% Page layout
@@ -198,11 +195,10 @@
  \renewcommand*\arraystretch{.8} %prevents double spacing in matrices and other arrays
  
 %%%%Begin maketitle Definition
-\newcommand*{\@department}{Mathematics}
-\newcommand*{\department}[1]{\renewcommand*{\@department}{#1}}
+\RequirePackage{xparse} % Use to let acceptancepage has optional argument.
 
   \if@titlepage
-  \newcommand\maketitle{\begin{titlepage}%
+  \NewDocumentCommand{\maketitle}{O{Department of Mathematics} o}{\begin{titlepage}%
   \let\footnotesize\small
   \let\footnoterule\relax
   \let \footnote \thanks
@@ -218,7 +214,7 @@
 \vfill
 {\large Submitted to the faculty of the University Graduate School\\
 in partial fulfillment of the requirements\\ for the degree\\ 
-Doctor of Philosophy\\ in the \if@school School \else Department \fi of \@department,\\
+Doctor of Philosophy\\ in the #1\IfNoValueF{#2}{\\ and the #2},\\
 Indiana University\\ \@date \par}
 \vskip 60\p@
 \end{center}
@@ -238,7 +234,7 @@ Indiana University\\ \@date \par}
   \global\let\and\relax
 }
 \else
-\newcommand\maketitle{\par
+\NewDocumentCommand{\maketitle}{O{Department of Mathematics} o}{\par
   \begingroup
     \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
     \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
@@ -308,7 +304,6 @@ Indiana University\\ \@date \par}
     }
 
 %%%%Begin Acceptance Page Definition
-\RequirePackage{xparse} % Use to let acceptancepage has optional argument.
 \newcommand*{\@commiteeMember}[1]{\hfill #1\vfill}
 \newcommand*{\@defensedate}{}
 \newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
