@@ -304,7 +304,7 @@ Indiana University\\ \@date \par}
     }
 
 %%%%Begin Acceptance Page Definition
-\newcommand*{\@commiteeMember}[1]{\hfill #1\vfill}
+\newcommand*{\@commiteeMember}[1]{\rule{0.5\textwidth}{0.4pt} \\ #1 \vfill}
 \newcommand*{\@defensedate}{}
 \newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
 \NewDocumentCommand{\acceptancepage}{m m m m o o}{\begin{centeredpage}%
@@ -316,12 +316,14 @@ Indiana University\\ \@date \par}
 Doctoral Committee
 \vfill
 
+\begin{flushright}
 \@commiteeMember{#1}
 \@commiteeMember{#2}
 \@commiteeMember{#3}
 \@commiteeMember{#4}
 \IfNoValueF{#5}{\@commiteeMember{#5}}
 \IfNoValueF{#6}{\@commiteeMember{#6}}
+\par\end{flushright}
 
 \@defensedate\par
 \end{centeredpage}%
