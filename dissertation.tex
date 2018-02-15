@@ -1,6 +1,7 @@
 \documentclass{iuphd}
 \usepackage[utf8]{inputenc}
 \usepackage{cite}
+\usepackage{pdfpages}
 
 \begin{document}
 
@@ -13,12 +14,12 @@
 
 % Acceptance Page
 \defensedate{Defense Date}
-% \acceptancepage{Committee Chair}{2nd Reader}{3rd Reader}{4th Reader}
+% \acceptancepage{Comm	ittee Chair}{2nd Reader}{3rd Reader}{4th Reader}
 \acceptancepage{Co-Chair, PhD}{Co-Chair, PhD}{3rd Reader, PhD}{4th Reader, PhD}[5th Reader, PhD]% [6th Reader]
 
 % Copyright Page
-\cryear{Current Year}
-\copyrightpage
+% \cryear{Current Year}
+% \copyrightpage
 
 %\begin{dedication}
 %\end{dedication}
@@ -50,5 +51,9 @@ The index is based on key words, so be as specific as you can be about your subj
 \bibliographystyle{plain}
 \bibliography{dissertation}
 
-%\include{CV}
+% http://latex.org/forum/viewtopic.php?t=7312
+% http://latex.org/forum/viewtopic.php?t=17956
+\addtocontents{toc}{\noindent\contentsline{chapter}{Curriculum Vitae}{}}
+% \include{CV}
+% \includepdf[pages=-]{CV_thesis}
 \end{document}
