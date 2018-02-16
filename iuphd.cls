@@ -305,18 +305,10 @@ Indiana University\\ \@date \par}
 
 %%%%Begin Acceptance Page Definition
 \newcommand*{\@commiteeMember}[1]{\rule{0.5\textwidth}{0.4pt} \\ #1 \vfill}
-\newcommand*{\@defensedate}{}
-\newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
-\NewDocumentCommand{\acceptancepage}{m m m m o o}{\begin{centeredpage}%
-\vspace{-0.5\baselineskip}
-\begin{center}
- Accepted by the Graduate Faculty, Indiana University, in partial fulfillment
- of the requirements for the degree of Doctor of Philosophy.\par
-\end{center}
-Doctoral Committee
-\vfill
-
+\NewDocumentCommand{\committee}{m m m m o o}{
+\newcommand*{\@commitee}{
 \begin{flushright}
+\vfill
 \@commiteeMember{#1}
 \@commiteeMember{#2}
 \@commiteeMember{#3}
@@ -324,6 +316,19 @@ Doctoral Committee
 \IfNoValueF{#5}{\@commiteeMember{#5}}
 \IfNoValueF{#6}{\@commiteeMember{#6}}
 \par\end{flushright}
+}
+}
+\newcommand*{\@defensedate}{}
+\newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
+\newcommand*{\acceptancepage}{\begin{centeredpage}%
+\vspace{-0.5\baselineskip}
+\begin{center}
+ Accepted by the Graduate Faculty, Indiana University, in partial fulfillment
+ of the requirements for the degree of Doctor of Philosophy.\par
+\end{center}
+Doctoral Committee
+
+\@commitee
 
 \@defensedate\par
 \end{centeredpage}%
@@ -552,6 +557,7 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 \raggedright
 }
 {
+\@commitee
   \end{centeredpage}% 
   }
 \else
