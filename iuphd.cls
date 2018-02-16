@@ -304,20 +304,18 @@ Indiana University\\ \@date \par}
     }
 
 %%%%Begin Acceptance Page Definition
-\newcommand*{\@commiteeMember}[1]{\rule{0.5\textwidth}{0.4pt} \\ #1 \vfill}
-\NewDocumentCommand{\committee}{m m m m o o}{
-\newcommand*{\@commitee}{
-\begin{flushright}
-\vfill
-\@commiteeMember{#1}
-\@commiteeMember{#2}
-\@commiteeMember{#3}
-\@commiteeMember{#4}
-\IfNoValueF{#5}{\@commiteeMember{#5}}
-\IfNoValueF{#6}{\@commiteeMember{#6}}
-\par\end{flushright}
-}
-}
+\RequirePackage{etoolbox}
+\newcommand*{\committeeMember}[1]{\listadd{\committeeMembersList}{#1}}
+% https://tex.stackexchange.com/questions/231055/how-can-i-create-a-list-as-a-variable-that-can-be-appended-and-eventually-typese
+\newcommand{\@committee}{{% Print list
+  % http://tex.stackexchange.com/a/89187/5764
+  \def\listsep{\def\listsep{,}}% Delayed execution of list separator
+  \begin{flushright}
+  \vfill
+  \renewcommand{\do}[1]{\listsep\rule{0.5\textwidth}{0.4pt} \\ ##1 \vfill}%
+  \dolistloop\committeeMembersList
+  \par\end{flushright}
+}}
 \newcommand*{\@defensedate}{}
 \newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
 \newcommand*{\acceptancepage}{\begin{centeredpage}%
@@ -328,7 +326,7 @@ Indiana University\\ \@date \par}
 \end{center}
 Doctoral Committee
 
-\@commitee
+\@committee
 
 \@defensedate\par
 \end{centeredpage}%
@@ -557,7 +555,7 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 \raggedright
 }
 {
-\@commitee
+\@committee
   \end{centeredpage}% 
   }
 \else
