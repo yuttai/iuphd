@@ -195,10 +195,10 @@
  \renewcommand*\arraystretch{.8} %prevents double spacing in matrices and other arrays
  
 %%%%Begin maketitle Definition
-\RequirePackage{xparse} % Use to let acceptancepage has optional argument.
-
+\RequirePackage{etoolbox}
+\newcommand*{\department}[1]{\listadd{\departmentList}{#1}}
   \if@titlepage
-  \NewDocumentCommand{\maketitle}{O{Department of Mathematics} o}{\begin{titlepage}%
+  \newcommand\maketitle{\begin{titlepage}%
   \let\footnotesize\small
   \let\footnoterule\relax
   \let \footnote \thanks
@@ -212,10 +212,24 @@
 	 \@author
      \end{tabular}\par}
 \vfill
-{\large Submitted to the faculty of the University Graduate School\\
-in partial fulfillment of the requirements\\ for the degree\\ 
-Doctor of Philosophy\\ in the #1\IfNoValueF{#2}{\\ and the #2},\\
-Indiana University\\ \@date \par}
+{
+  \newcommand{\beforeDepartment}{\large Submitted to the faculty of the University Graduate School\\
+    in partial fulfillment of the requirements\\ for the degree\\
+    Doctor of Philosophy\\ in the }
+  \newcommand{\afterDepartment}{,\\
+    Indiana University\\ \@date \par}
+  % https://tex.stackexchange.com/questions/105885/comma-delimited-list-how-to-obtain-the-length
+  \newcounter{listCount}
+  \setcounter{listCount}{0}
+  \renewcommand{\do}[1]{\stepcounter{listCount}\@gobble{##1}}
+  \dolistloop{\departmentList}
+  % https://tex.stackexchange.com/questions/231055/how-can-i-create-a-list-as-a-variable-that-can-be-appended-and-eventually-typese
+  \ifnumcomp{\value{listCount}}{=}{1}{
+    \beforeDepartment \forlistloop{}{\departmentList}\afterDepartment
+  }{
+    \beforeDepartment \forlistloop{\\ and the }{\departmentList}\afterDepartment
+  }
+}
 \vskip 60\p@
 \end{center}
 %\@thanks
@@ -234,7 +248,7 @@ Indiana University\\ \@date \par}
   \global\let\and\relax
 }
 \else
-\NewDocumentCommand{\maketitle}{O{Department of Mathematics} o}{\par
+\newcommand\maketitle{\par
   \begingroup
     \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
     \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
@@ -304,18 +318,14 @@ Indiana University\\ \@date \par}
     }
 
 %%%%Begin Acceptance Page Definition
-\RequirePackage{etoolbox}
 \newcommand*{\committeeMember}[1]{\listadd{\committeeMembersList}{#1}}
 % https://tex.stackexchange.com/questions/231055/how-can-i-create-a-list-as-a-variable-that-can-be-appended-and-eventually-typese
-\newcommand{\@committee}{{% Print list
-  % http://tex.stackexchange.com/a/89187/5764
-  \def\listsep{\def\listsep{,}}% Delayed execution of list separator
+\newcommand{\@committee}{
   \begin{flushright}
-  \vfill
-  \renewcommand{\do}[1]{\listsep\rule{0.5\textwidth}{0.4pt} \\ ##1 \vfill}%
-  \dolistloop\committeeMembersList
-  \par\end{flushright}
-}}
+    \forlistloop{\vfill\rule{0.5\textwidth}{0.4pt} \\ }{\committeeMembersList}
+    \vfill\par
+  \end{flushright}
+}
 \newcommand*{\@defensedate}{}
 \newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
 \newcommand*{\acceptancepage}{\begin{centeredpage}%
