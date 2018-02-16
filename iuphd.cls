@@ -227,7 +227,9 @@
   \ifnumcomp{\value{listCount}}{=}{1}{
     \beforeDepartment \forlistloop{}{\departmentList}\afterDepartment
   }{
-    \beforeDepartment \forlistloop{\\ and the }{\departmentList}\afterDepartment
+    \def\listsep{\def\listsep{\\ and the }}% Delayed execution of list separator
+    \renewcommand{\do}[1]{\listsep{##1}}
+    \beforeDepartment\dolistloop{\departmentList}\afterDepartment
   }
 }
 \vskip 60\p@
