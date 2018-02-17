@@ -213,24 +213,18 @@
      \end{tabular}\par}
 \vfill
 {
-  \newcommand{\beforeDepartment}{\large Submitted to the faculty of the University Graduate School\\
-    in partial fulfillment of the requirements\\ for the degree\\
-    Doctor of Philosophy\\ in the }
-  \newcommand{\afterDepartment}{,\\
-    Indiana University\\ \@date \par}
   % https://tex.stackexchange.com/questions/105885/comma-delimited-list-how-to-obtain-the-length
-  \newcounter{listCount}
-  \setcounter{listCount}{0}
-  \renewcommand{\do}[1]{\stepcounter{listCount}\@gobble{##1}}
+  \newcounter{totalNumberOfDepartments}
+  \renewcommand{\do}[1]{\stepcounter{totalNumberOfDepartments}\@gobble{##1}}
   \dolistloop{\departmentList}
   % https://tex.stackexchange.com/questions/231055/how-can-i-create-a-list-as-a-variable-that-can-be-appended-and-eventually-typese
-  \ifnumcomp{\value{listCount}}{=}{1}{
-    \beforeDepartment \forlistloop{}{\departmentList}\afterDepartment
-  }{
-    \def\listsep{\def\listsep{\\ and the }}% Delayed execution of list separator
-    \renewcommand{\do}[1]{\listsep{##1}}
-    \beforeDepartment\dolistloop{\departmentList}\afterDepartment
-  }
+  \newcounter{currentNumberOfDepartments}
+  \renewcommand{\do}[1]{\ifnumequal{\value{currentNumberOfDepartments}}{0}{\ifnumequal{\value{totalNumberOfDepartments}}{2}{the {##1}\\}{the {##1},\\}}{\ifnumequal{\value{currentNumberOfDepartments}}{\value{totalNumberOfDepartments}-1}{and the {##1},\\}{the {##1},\\}}\stepcounter{currentNumberOfDepartments}}
+  \large Submitted to the faculty of the University Graduate School\\
+  in partial fulfillment of the requirements\\ for the degree\\
+  Doctor of Philosophy\\ in \dolistloop{\departmentList}
+  Indiana University\\ \@date \par
+
 }
 \vskip 60\p@
 \end{center}
