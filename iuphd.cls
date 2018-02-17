@@ -90,7 +90,6 @@
 }
 \ExecuteOptions{letterpaper,11pt,oneside,onecolumn,final,openany,hideabstract,hideacknowlegments,hidededication,hidepreface}
 \ProcessOptions
-\input{size1\@ptsize.clo}
  %% Page layout
 \setlength\textwidth{6in}
 \setlength\textheight{9in}
