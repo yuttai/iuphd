@@ -550,13 +550,13 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
     \addcontentsline{toc}{chapter}{ABSTRACT}
  \else
  \fi
- \vspace{-\baselineskip}
+ \vfill
   \begin{center}
-{\LARGE\@author\par}
- \vspace{20\p@}
+{\@author\par}
+ \vfill
  
-{\huge\MakeTextUppercase{\@title}\par}
- \vspace{20\p@}
+{\MakeTextUppercase{\@title}\par}
+ \vfill
 \end{center}
 \raggedright
 }
