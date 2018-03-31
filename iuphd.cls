@@ -708,7 +708,7 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
     }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Put \clearpage before \addcontentsline to make sure the page is correct.
+% Put \clearpage before \addcontentsline to make sure the page number is correct.
 \newcommand{\addcontentsBibliography}{\clearpage{}\addcontentsline{toc}{chapter}{Bibliography}}
     
 \newcommand\appendix{\par
