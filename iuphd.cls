@@ -707,6 +707,9 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
     \if@restonecol\twocolumn \else \newpage \fi
     }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Put \clearpage before \addcontentsline to make sure the page is correct.
+\newcommand{\addcontentsBibliography}{\clearpage{}\addcontentsline{toc}{chapter}{Bibliography}}
     
 \newcommand\appendix{\par
   \setcounter{chapter}{0}%
