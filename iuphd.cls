@@ -316,11 +316,15 @@
 %%%%Begin Acceptance Page Definition
 \newcommand*{\committeeMember}[1]{\listadd{\committeeMembersList}{#1}}
 % https://tex.stackexchange.com/questions/231055/how-can-i-create-a-list-as-a-variable-that-can-be-appended-and-eventually-typese
+\RequirePackage{setspace}
 \newcommand{\@committee}{
-  \begin{flushright}
-    \forlistloop{\vfill\rule{0.5\textwidth}{0.4pt} \\ }{\committeeMembersList}
-    \vfill\par
-  \end{flushright}
+  {
+    \setstretch{1}
+    \begin{flushright}
+      \forlistloop{\vfill\rule{0.5\textwidth}{0.4pt} \\ }{\committeeMembersList}
+      \vfill\par
+    \end{flushright}
+  }
 }
 \newcommand*{\@defensedate}{}
 \newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
