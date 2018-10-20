@@ -562,7 +562,6 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 {\MakeTextUppercase{\@title}\par}
  \vfill
 \end{center}
-\raggedright
 }
 {
 \@committee
