@@ -306,10 +306,8 @@
       \else
         \@restonecolfalse\newpage
       \fi
-      \null\vfill
     }%
     {
-    \vfill\null
     \if@restonecol\twocolumn \else \newpage \fi
     }
 
@@ -550,18 +548,12 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 %%%%Begin abstract Definition
 \if@titlepage
   \newenvironment{abstract}{\begin{centeredpage}%
+\chapter*{\@author\protect \\
+\MakeTextUppercase{\@title}}%
  \if@abstract
     \addcontentsline{toc}{chapter}{ABSTRACT}
  \else
  \fi
- \vfill
-  \begin{center}
-{\@author\par}
- \vfill
- 
-{\MakeTextUppercase{\@title}\par}
- \vfill
-\end{center}
 }
 {
 \@committee
@@ -640,71 +632,48 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 %titlepage
 \newenvironment{titlepage}
     {%
-      \if@twocolumn
-        \@restonecoltrue\onecolumn
-      \else
-        \@restonecolfalse\newpage
-      \fi
+      \begin{centeredpage}%
       \thispagestyle{empty}%
       \pagenumbering{roman}
       \setcounter{page}\@ne
     }%
-    {\if@restonecol\twocolumn \else \newpage \fi
-    }
+    {\end{centeredpage}}
 
 %dedication
 \newenvironment{dedication}
     {%
-      \if@twocolumn
-        \@restonecoltrue\onecolumn
-      \else
-        \@restonecolfalse\newpage
-      \fi
+      \begin{centeredpage}%
       \chapter*{DEDICATION}
       \if@dedication
       \addcontentsline{toc}{chapter}{DEDICATION}
       \else
       \fi
     }%
-    {
-    \if@restonecol\twocolumn \else \newpage \fi
-    }
+    {\end{centeredpage}}
 
 %acknowledgments
 \newenvironment{acknowledgments}
     {%
-      \if@twocolumn
-        \@restonecoltrue\onecolumn
-      \else
-        \@restonecolfalse\newpage
-      \fi
+      \begin{centeredpage}%
       \chapter*{ACKNOWLEDGMENTS}
       \if@acknowledgments
       \addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}
       \else
       \fi
     }%
-    {
-    \if@restonecol\twocolumn \else \newpage \fi
-    }
+    {\end{centeredpage}}
 
 %preface
 \newenvironment{preface}
     {%
-      \if@twocolumn
-        \@restonecoltrue\onecolumn
-      \else
-        \@restonecolfalse\newpage
-      \fi
+      \begin{centeredpage}%
       \chapter*{PREFACE}
        \if@preface
        \addcontentsline{toc}{chapter}{PREFACE}
        \else
        \fi
     }%
-    {
-    \if@restonecol\twocolumn \else \newpage \fi
-    }
+    {\end{centeredpage}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Put \clearpage before \addcontentsline to make sure the page number is correct.
@@ -780,17 +749,12 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 \newcommand\@dotsep{4.5}
 \setcounter{tocdepth}{2}
 \newcommand\tableofcontents{%
-    \if@twocolumn
-      \@restonecoltrue\onecolumn
-    \else
-      \@restonecolfalse
-    \fi
+    \begin{centeredpage}%
     \chapter*{\contentsname
         \@mkboth{%
            \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
     \@starttoc{toc}%
-    \if@restonecol\twocolumn\fi
-    \clearpage
+    \end{centeredpage}%
     \pagenumbering{arabic}
     \setcounter{page}{1}
     }
@@ -830,30 +794,22 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 \newcommand*\l@paragraph{\@dottedtocline{4}{10em}{5em}}
 \newcommand*\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
 \newcommand\listoffigures{%
-    \if@twocolumn
-      \@restonecoltrue\onecolumn
-    \else
-      \@restonecolfalse
-    \fi
+    \begin{centeredpage}%
     \chapter*{\listfigurename}%
       \@mkboth{\MakeUppercase\listfigurename}%
               {\MakeUppercase\listfigurename}%
     \@starttoc{lof}%
-    \if@restonecol\twocolumn\fi
+    \end{centeredpage}%
     }
 \newcommand*\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
 \newcommand\listoftables{%
-    \if@twocolumn
-      \@restonecoltrue\onecolumn
-    \else
-      \@restonecolfalse
-    \fi
+    \begin{centeredpage}%
     \chapter*{\listtablename}%
       \@mkboth{%
           \MakeUppercase\listtablename}%
          {\MakeUppercase\listtablename}%
     \@starttoc{lot}%
-    \if@restonecol\twocolumn\fi
+    \end{centeredpage}%
     }
 \let\l@table\l@figure
 \newdimen\bibindent
