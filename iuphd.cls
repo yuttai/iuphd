@@ -317,6 +317,7 @@
 \RequirePackage{setspace}
 \newcommand{\@committee}{
   {
+    \par
     \setstretch{1}
     \begin{flushright}
       \forlistloop{\vfill\rule{0.5\textwidth}{0.4pt} \\ }{\committeeMembersList}
