@@ -346,15 +346,23 @@ Doctoral Committee
 \newcommand*{\@cryear}{}
 \newcommand*{\cryear}[1]{\renewcommand*{\@cryear}{#1}}
 
-\newcommand\copyrightpage{\begin{centeredpage}%
-\vspace{-\baselineskip}
-\begin{center}
+\newenvironment{centeredHorizontallyAndVertically}{
+ \begin{centeredpage}%
+ \null\vfill
+ \begin{center}
+}{
+ \end{center}
+ \vfill\null
+ \end{centeredpage}%
+}
+
+\newcommand\copyrightpage{
+\begin{centeredHorizontallyAndVertically}
 Copyright \copyright\ \@cryear\\ %set to use \@Year
      \begin{tabular}[t]{c}
         \@author
       \end{tabular}%\par
-\end{center}
-\end{centeredpage}%
+\end{centeredHorizontallyAndVertically}
 \global\let\cryear\relax
 }
 %%%%End Copyright Page Definition
@@ -642,14 +650,13 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 %dedication
 \newenvironment{dedication}
     {%
-      \begin{centeredpage}%
-      \chapter*{DEDICATION}
+      \begin{centeredHorizontallyAndVertically}%
       \if@dedication
       \addcontentsline{toc}{chapter}{DEDICATION}
       \else
       \fi
     }%
-    {\end{centeredpage}}
+    {\end{centeredHorizontallyAndVertically}}
 
 %acknowledgments
 \newenvironment{acknowledgments}
