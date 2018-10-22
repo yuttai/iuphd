@@ -40,7 +40,8 @@ page one. The only part of this that is not standard in the \LaTeX \ report clas
 by changing the definitions to \textbackslash maketitle and \textbackslash tableofcontents.
 
 The current standard for chapter headings seems to be that they are centered and in all caps.  The iuphd.cls enforces these
-conventions automatically, however it is possible to override these changes with titlesec and titletoc. Because the textcase package is used,
+conventions automatically, however it is possible to override these changes with
+titlesec and titletoc packages. Because the textcase package is used,
 the capitalization is not affected in math mode, so for instance
 \medskip
 
@@ -49,9 +50,10 @@ the capitalization is not affected in math mode, so for instance
 
 \noindent will give the output ``$p$-ADIC NUMBERS'' in both the section heading and in the table of contents
 (unless the value of \textbackslash tocdepth is changed to prevent sections from being listed in the table of contents).
-Since all caps takes up more space horizontally than mixed upper and lowecase text, the size of the chapter headings
-has been reduced to \textbackslash LARGE from \textbackslash huge.  However, no changes have been made to the size of any of the
-other headings in the report class.
+For LaTeX standard classes with [11pt], \textbackslash large command produces
+$12$ points text~\cite{wiki:LaTeXFonts}. Since font size should be either $11$
+or $12$ point for the entire document, the size of any headings in the report class
+which is larger than \textbackslash large is changed to \textbackslash large.
 
 Most dissertations are one-sided, with an additional half inch added to the left hand margin on each page for the purpose of binding.
 Although this is the standard, they do allow for the possibility of two-sided printing, which would cause the side with the extra margin

@@ -202,16 +202,16 @@
   \let\footnotesize\small
   \let\footnoterule\relax
   \let \footnote \thanks
-\null\vfil
+\null\vfill
 \begin{center}
 \vskip 60\p@
-{\huge \MakeTextUppercase{\@title} \par}
+{\Large \MakeTextUppercase{\@title} \par}
 \vskip 3em
-{\LARGE
+{\large
     \begin{tabular}[t]{c}
 	 \@author
      \end{tabular}\par}
-\vfill
+\vfill\vfill
 {
   % https://tex.stackexchange.com/questions/105885/comma-delimited-list-how-to-obtain-the-length
   \newcounter{totalNumberOfDepartments}
@@ -412,17 +412,17 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
      \interlinepenalty \@M
      \normalfont
      \ifnum \c@secnumdepth >-2\relax
-       \huge\bfseries \partname\nobreakspace\thepart
+       \large\bfseries \partname\nobreakspace\thepart
        \par
        \vskip 20\p@
      \fi
-     \Huge \bfseries \MakeTextUppercase{#2}\par}%
+     \large \bfseries \MakeTextUppercase{#2}\par}%
     \@endpart}
 \def\@spart#1{%
     {\centering
      \interlinepenalty \@M
      \normalfont
-     \Huge \bfseries \MakeTextUppercase{#1}\par}%
+     \large \bfseries \MakeTextUppercase{#1}\par}%
     \@endpart}
 \def\@endpart{\vfil\newpage
               \if@twoside
@@ -464,12 +464,12 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
   \centering
   \normalfont
     \ifnum \c@secnumdepth >\m@ne
-        \LARGE\bfseries \@chapapp\space \thechapter
+        \large\bfseries \@chapapp\space \thechapter
         \par\nobreak
         \vskip 20\p@
     \fi
     \interlinepenalty\@M
-    \huge \bfseries \MakeTextUppercase{#1}\par\nobreak
+    \large \bfseries \MakeTextUppercase{#1}\par\nobreak
     \vskip 40\p@
   }}
 \def\@schapter#1{\if@twocolumn
@@ -485,14 +485,14 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
     \centering
     \normalfont
     \interlinepenalty\@M
-    \huge \bfseries \MakeTextUppercase{#1}\par\nobreak
+    \large \bfseries \MakeTextUppercase{#1}\par\nobreak
 
     \vskip 40\p@
   }}
 \newcommand\section{\@startsection {section}{1}{\z@}%
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
                                    {2.3ex \@plus.2ex}%
-                                   {\normalfont\Large\bfseries\MakeTextUppercase}}
+                                   {\normalfont\large\bfseries\MakeTextUppercase}}
 \newcommand\subsection{\@startsection{subsection}{2}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
