@@ -9,18 +9,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{textcase}
-\newif\if@preface
-\DeclareOption{showpreface}{\@prefacetrue}
-\DeclareOption{hidepreface}{\@prefacefalse}
-\newif\if@acknowledgments
-\DeclareOption{showacknowledgments}{\@acknowledgmentstrue}
-\DeclareOption{hideacknowledgments}{\@acknowledgmentsfalse}
-\newif\if@abstract
-\DeclareOption{showabstract}{\@abstracttrue}
-\DeclareOption{hideabstract}{\@abstractfalse}
-\newif\if@dedication
-\DeclareOption{showdedication}{\@dedicationtrue}
-\DeclareOption{hidededication}{\@dedicationfalse}
 %see addtions to execute options below
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -88,7 +76,7 @@
       }%
    \renewcommand\newblock{\par}}%
 }
-\ExecuteOptions{letterpaper,11pt,oneside,onecolumn,final,openany,hideabstract,hideacknowlegments,hidededication,hidepreface}
+\ExecuteOptions{letterpaper,11pt,oneside,onecolumn,final,openany}
 \ProcessOptions
 \input{size1\@ptsize.clo}
  %% Page layout
@@ -555,14 +543,17 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
                                 \normalfont\bfseries #1}
 
 %%%%Begin abstract Definition
+
+% Put \clearpage before \addcontentsline to make sure the page number is correct.
+\newcommand{\clearpageAddContentsChapter}[1]{\clearpage{}\addcontentsline{toc}{chapter}{\MakeTextUppercase{#1}}}
+% http://latex.org/forum/viewtopic.php?t=7312
+% http://latex.org/forum/viewtopic.php?t=17956
+\newcommand{\addContentsChapterWithoutPagenumber}[1]{\addtocontents{toc}{\contentsline{chapter}{\MakeTextUppercase{#1}}{}}}
+
 \if@titlepage
   \newenvironment{abstract}{\begin{centeredpage}%
 \chapter*{\@author\protect \\
 \MakeTextUppercase{\@title}}%
- \if@abstract
-    \addcontentsline{toc}{chapter}{ABSTRACT}
- \else
- \fi
 }
 {
 \@committee
@@ -581,6 +572,8 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
       \fi}
       {\if@twocolumn\else\endquotation\fi}
 \fi
+
+\newenvironment{abstract*}{\clearpageAddContentsChapter{\abstractname}\begin{abstract}}{\end{abstract}}
 %%%%End abstract Definition
 
 \let\tempone\itemize
@@ -649,46 +642,17 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
     {\end{centeredpage}}
 
 %dedication
-\newenvironment{dedication}
-    {%
-      \begin{centeredHorizontallyAndVertically}%
-      \if@dedication
-      \addcontentsline{toc}{chapter}{DEDICATION}
-      \else
-      \fi
-    }%
-    {\end{centeredHorizontallyAndVertically}}
+\newenvironment{dedication}{\begin{centeredHorizontallyAndVertically}}{\end{centeredHorizontallyAndVertically}}
+\newenvironment{dedication*}{\clearpageAddContentsChapter{dedication}\begin{dedication}}{\end{dedication}}
 
 %acknowledgments
-\newenvironment{acknowledgments}
-    {%
-      \begin{centeredpage}%
-      \chapter*{ACKNOWLEDGMENTS}
-      \if@acknowledgments
-      \addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}
-      \else
-      \fi
-    }%
-    {\end{centeredpage}}
+\newenvironment{acknowledgments}{\begin{centeredpage}\chapter*{ACKNOWLEDGMENTS}}{\end{centeredpage}}
+\newenvironment{acknowledgments*}{\clearpageAddContentsChapter{acknowledgments}\begin{acknowledgments}}{\end{acknowledgments}}
 
 %preface
-\newenvironment{preface}
-    {%
-      \begin{centeredpage}%
-      \chapter*{PREFACE}
-       \if@preface
-       \addcontentsline{toc}{chapter}{PREFACE}
-       \else
-       \fi
-    }%
-    {\end{centeredpage}}
+\newenvironment{preface}{\begin{centeredpage}\chapter*{PREFACE}}{\end{centeredpage}}
+\newenvironment{preface*}{\clearpageAddContentsChapter{preface}\begin{preface}}{\end{preface}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Put \clearpage before \addcontentsline to make sure the page number is correct.
-\newcommand{\clearpageAddContentsChapter}[1]{\clearpage{}\addcontentsline{toc}{chapter}{\MakeTextUppercase{#1}}}
-% http://latex.org/forum/viewtopic.php?t=7312
-% http://latex.org/forum/viewtopic.php?t=17956
-\newcommand{\addContentsChapterWithoutPagenumber}[1]{\addtocontents{toc}{\contentsline{chapter}{\MakeTextUppercase{#1}}{}}}
     
 \newcommand\appendix{\par
   \setcounter{chapter}{0}%

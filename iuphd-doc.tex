@@ -20,61 +20,56 @@ changes to the report class include the following:
  \item the addition of the `acknowledgments', `preface', and `dedication' environments,
  \item the addition of macros for specifying the department or school name, the names of
  the committee members, the defense date, and the copyright year,
- \item document class options for showing
- the abstract, preface, acknowledgments, or dedication in the table of contents.
+ \item the addition of the \code{abstract*}, \code{preface*}, \code{acknowledgments*}, or \code{dedication*} environments having the same function as the non-star version, but show them in the table of contents.
 \end{itemize}
 
 The appropriate commands for using these features are already typed into the dissertation.tex sample file,
-with the optional items (dedication, preface, and copyright) commented out.  Simply remove the \% from the front
-of these optional commands if you wish to use them.  The headings for the acknowledgments, preface, and dedication have
+with the optional items (copyright, dedication, acknowledgments, and preface) commented out.  Simply remove the \% from the front
+of these optional commands if you wish to use them.  The headings for the acknowledgments and preface have
 been defined as unnumbered chapter headings, which means they will not show up in the table of contents by default.
 See the instructions below for adding them to the table of contents if desired.
 
 \section{Current Standards at IU}
-The current version of iuphd.cls complies with the standards of formatting a dissertation at IU as of 2013.  Below is a discussion of
+The current version of iuphd.cls complies with the standards of formatting a dissertation at IU as of $2018$.  Below is a discussion of
 some of the main points.
 
 The current pagination standard is for the page number to appear centered at the top or bottom of the
 page, and to use lowercase roman numerals for the material preceding the first chapter with the title page unnumbered but counting as
 page one. The only part of this that is not standard in the \LaTeX \ report class is the use of roman numerals, which was accomplished
-by changing the definitions to \textbackslash maketitle and \textbackslash tableofcontents.
+by changing the definitions to \code{\textbackslash maketitle} and \code{\textbackslash tableofcontents}.
 
 The current standard for chapter headings seems to be that they are centered and in all caps.  The iuphd.cls enforces these
 conventions automatically, however it is possible to override these changes with
 titlesec and titletoc packages. Because the textcase package is used,
 the capitalization is not affected in math mode, so for instance
-\medskip
-
-\textbackslash section\{\$p\$-adic numbers\}
-\medskip
-
-\noindent will give the output ``$p$-ADIC NUMBERS'' in both the section heading and in the table of contents
-(unless the value of \textbackslash tocdepth is changed to prevent sections from being listed in the table of contents).
-For LaTeX standard classes with [11pt], \textbackslash large command produces
+\begin{verbatim}
+\section{$p$-adic numbers}
+\end{verbatim}
+will give the output ``$p$-ADIC NUMBERS'' in both the section heading and in the table of contents
+(unless the value of \code{\textbackslash tocdepth} is changed to prevent sections from being listed in the table of contents).
+For LaTeX standard classes with \code{[11pt]}, \code{\textbackslash large} command produces
 $12$ points text~\cite{wiki:LaTeXFonts}. Since font size should be either $11$
 or $12$ point for the entire document, the size of any headings in the report class
-which is larger than \textbackslash large is changed to \textbackslash large.
+which is larger than \code{\textbackslash large} is changed to \code{\textbackslash large}.
 
 Most dissertations are one-sided, with an additional half inch added to the left hand margin on each page for the purpose of binding.
 Although this is the standard, they do allow for the possibility of two-sided printing, which would cause the side with the extra margin
 to alternate for binding.  This is automatically enforced simply by using the twoside option (a feature already built into the
 standard report class). This is done as follows:
-\medskip
-
-\textbackslash documentclass[twoside]\{iuphd\}
-\medskip
-
+\begin{verbatim}
+\documentclass[twoside]{iuphd}
+\end{verbatim}
 There does not seem to be a standard about whether the abstract, preface, acknowledgments, and dedication are listed in the table of
-contents (TOC) or not.  As such, an option has been provided for including or excluding each one individually.  The syntax for these options
-follows the pattern `showX' if X is to be listed in the TOC, and 'hideX' if X is to be omitted from the TOC, where X can be any of the four
-items listed above.  In all cases, the default is for these \emph{not} to have entries in the table of contents.  So for example, to include
+contents (TOC) or not.  As such, an stared version of these environments has been provided for including each one individually.
+So for example, to include
 both the abstract and the preface in the table of contents, but not the dedication or acknowledgments, you would use the code:
-\medskip
-
-\textbackslash documentclass[showabstract,showpreface]\{iuphd\}
-\medskip
-
-\noindent To include a line for the bibliography in the table of contents, the command
+\begin{verbatim}
+\begin{dedication} ... \end{dedication}
+\begin{acknowledgments} ... \end{acknowledgments}
+\begin{preface*} ... \end{preface*}
+\begin{abstract*} ... \end{abstract*}
+\end{verbatim}
+To include a line for the bibliography in the table of contents, the command
 \begin{verbatim}
 \clearpageAddContentsChapter{Bibliography}
 \end{verbatim}
