@@ -75,16 +75,16 @@ both the abstract and the preface in the table of contents, but not the dedicati
 \medskip
 
 \noindent To include a line for the bibliography in the table of contents, the command
-\medskip
-
-\textbackslash addcontentsline\{toc\}\{chapter\}\{BIBLIOGRAPHY\}
-\medskip
-
-\noindent should be placed directly above the \textbackslash bibliography and \textbackslash bibliographystyle commands.  It may be necessary
-to use \textbackslash clearpage above this command to get the page number displayed in the contents to be correct.  However, if you are using
-\textbackslash include for each chapter, then \textbackslash clearpage has technically already been used in this case, and so it is not
-necessary to use it again. Similar commands will work for including any unnumbered heading in the table of contents, with careful attention
-to the effects of \textbackslash clearpage.
+\begin{verbatim}
+\clearpageAddContentsChapter{Bibliography}
+\end{verbatim}
+should be placed directly above the \code{\textbackslash bibliography} and \code{\textbackslash bibliographystyle} commands,
+where a \code{\textbackslash clearpage} is placed before adding a new content line to get the page number displayed in the contents correctly.
+Since the curriculum vitae should not have a page number, the command including the curriculum vitae is different from the one including the bibliography
+\begin{verbatim}
+\addContentsChapterWithoutPagenumber{Curriculum Vitae}
+\end{verbatim}
+Similar commands will work for including any unnumbered heading in the table of contents with or without a page number.
 
 Various commands have been defined for the data that will show up on the title page, acceptance page, and copyright page.  These include:
 \begin{itemize}

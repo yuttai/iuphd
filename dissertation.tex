@@ -2,6 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{cite}
 \usepackage{pdfpages}
+\usepackage{verbatim}
+\providecommand*{\code}[1]{\texttt{#1}}
 
 \begin{document}
 
@@ -55,13 +57,11 @@ The index is based on key words, so be as specific as you can be about your subj
 
 \include{iuphd-doc}
 
-\addcontentsBibliography
+\clearpageAddContentsChapter{Bibliography}
 \bibliographystyle{plain}
 \bibliography{dissertation}
 
-% http://latex.org/forum/viewtopic.php?t=7312
-% http://latex.org/forum/viewtopic.php?t=17956
-\addtocontents{toc}{\contentsline{chapter}{Curriculum Vitae}{}}
+\addContentsChapterWithoutPagenumber{Curriculum Vitae}
 % \include{CV}
 % \includepdf[pages=-]{CV_thesis}
 \end{document}

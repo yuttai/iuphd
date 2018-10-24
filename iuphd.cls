@@ -685,7 +685,10 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Put \clearpage before \addcontentsline to make sure the page number is correct.
-\newcommand{\addcontentsBibliography}{\clearpage{}\addcontentsline{toc}{chapter}{Bibliography}}
+\newcommand{\clearpageAddContentsChapter}[1]{\clearpage{}\addcontentsline{toc}{chapter}{\MakeTextUppercase{#1}}}
+% http://latex.org/forum/viewtopic.php?t=7312
+% http://latex.org/forum/viewtopic.php?t=17956
+\newcommand{\addContentsChapterWithoutPagenumber}[1]{\addtocontents{toc}{\contentsline{chapter}{\MakeTextUppercase{#1}}{}}}
     
 \newcommand\appendix{\par
   \setcounter{chapter}{0}%
