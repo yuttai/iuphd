@@ -19,7 +19,7 @@ changes to the report class include the following:
  \item the addition of commands for creating the acceptance page and copyright page,
  \item the addition of the `acknowledgments', `preface', and `dedication' environments,
  \item the addition of macros for specifying the department or school name, the names of
- the committee members, the defense date, and the copyright year,
+ the committee members, the defense date, and the month and year degree will be granted,
  \item the addition of the \code{abstract*}, \code{preface*}, \code{acknowledgments*}, or \code{dedication*} environments having the same function as the non-star version, but show them in the table of contents.
 \end{itemize}
 
@@ -83,16 +83,18 @@ Similar commands will work for including any unnumbered heading in the table of 
 
 Various commands have been defined for the data that will show up on the title page, acceptance page, and copyright page.  These include:
 \begin{itemize}
- \item \textbackslash title - for the title of the dissertation
- \item \textbackslash author - for the name of the author of the dissertation
- \item \textbackslash date - for the \emph{completion date} of the dissertation
- \item \textbackslash department - for the name of the department(s) (or school(s)) you are in.  Notice that the university graduate school doesn't specify the format for writing departments for double-major students~\cite{DoctoralFormatting2018}.  Different students use different formats \cite{Hansen2015,Agmon2016,Bambach2016}, and we follow the majority of recently accepted format.
- \item \textbackslash defensedate - for the \emph{defense date} of the dissertation (which may not match the completion date).
- \item \textbackslash cryear - for the copyright year.
- \item \textbackslash committeeMember - for the names of the dissertation committee members.
+ \item \code{\textbackslash title} - for the title of the dissertation
+ \item \code{\textbackslash author} - for the name of the author of the dissertation
+ \item \code{\textbackslash department} - for the name of the department(s) (or school(s)) you are in.  Notice that the university graduate school doesn't specify the format for writing departments for double-major students~\cite{DoctoralFormatting2018}.  Different students use different formats \cite{Hansen2015,Agmon2016,Bambach2016}, and we follow the majority of recently accepted format.
+ \item \code{\textbackslash defensedate} - for the \emph{defense date} of the dissertation (which may not match the completion date).
+ \item \code{\textbackslash committeeMember} - for the names of the dissertation committee members.
+ \item \code{\textbackslash monthGranted} - for the month degree will be granted. 
+ \item \code{\textbackslash yearGranted} - for the year degree will be granted.
 \end{itemize}
 
-Additionally the commands \textbackslash acceptancepage and \textbackslash copyrightpage have been defined to generate the acceptance page and copyright page
+In my dissertation.tex sample file, we use \code{datetime2} and \code{datetime2-calc} packages to get the current month and year for the month and year degree will be granted. These can be changed if the month you get your degree is different from the month this file been compiled.
+
+Additionally the commands \code{\textbackslash acceptancepage} and \code{\textbackslash copyrightpage} have been defined to generate the acceptance page and copyright page
 respectively.  The copyright page is not required, so it has been commented out of my dissertation.tex sample file.
 
 A CV is also required following the bibliography, however, to maintain maximum flexibility I have not provided any special tools for

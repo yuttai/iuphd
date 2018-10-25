@@ -4,16 +4,19 @@
 \usepackage{pdfpages}
 \usepackage{verbatim}
 \providecommand*{\code}[1]{\texttt{#1}}
+\usepackage{datetime2}
+\usepackage{datetime2-calc}
 
 \begin{document}
 
 % Title Page
-\title{Dissertation Title}
+\title{TITLE CENTERED, IN ALL CAPITAL LETTERS, and DOUBLE SPACED IF TITLE EXTENDS TO MORE THAN ONE LINE OF TEXT}
 \author{Author}
-\date{Completion Date}
 \department{Department of Mathematics}
 % \department{Department of your second major}
 % \department{Department of your third major}
+\monthGranted{\DTMmonthname{\month}}
+\yearGranted{\the\year}
 \maketitle
 
 % Acceptance Page
@@ -22,11 +25,11 @@
 \committeeMember{3rd Reader, PhD}
 \committeeMember{4th Reader, PhD}
 \committeeMember{5th Reader, PhD}
+\committeeMember{6th Reader, PhD}
 \defensedate{Defense Date}
 \acceptancepage
 
 % Copyright Page
-% \cryear{Current Year}
 % \copyrightpage
 
 % \begin{dedication}

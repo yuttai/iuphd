@@ -181,25 +181,35 @@
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
 
  \renewcommand*\arraystretch{.8} %prevents double spacing in matrices and other arrays
+
+%centeredpage
+\newenvironment{centeredpage}
+  {\if@twocolumn \@restonecoltrue\onecolumn \else \@restonecolfalse\newpage \fi}
+  {\if@restonecol \twocolumn \else \newpage \fi}
+
+\newenvironment{centeredHorizontallyAndVertically}
+  {\begin{centeredpage}\null\vfill\begin{center}}
+  {\end{center}\vfill\null\end{centeredpage}}
+
+\newcommand*{\@monthGranted}{}
+\newcommand*{\monthGranted}[1]{\renewcommand*{\@monthGranted}{#1}}
  
+\newcommand*{\@yearGranted}{}
+\newcommand*{\yearGranted}[1]{\renewcommand*{\@yearGranted}{#1}}
+
 %%%%Begin maketitle Definition
 \RequirePackage{etoolbox}
 \newcommand*{\department}[1]{\listadd{\departmentList}{#1}}
   \if@titlepage
-  \newcommand\maketitle{\begin{titlepage}%
+  \newcommand\maketitle{\begin{centeredHorizontallyAndVertically}%
+  \thispagestyle{empty}
   \let\footnotesize\small
   \let\footnoterule\relax
   \let \footnote \thanks
-\null\vfill
-\begin{center}
-\vskip 60\p@
 {\Large \MakeTextUppercase{\@title} \par}
-\vskip 3em
-{\large
-    \begin{tabular}[t]{c}
-	 \@author
-     \end{tabular}\par}
-\vfill\vfill
+\vfill
+{\large \@author \par}
+\vfill
 {
   % https://tex.stackexchange.com/questions/105885/comma-delimited-list-how-to-obtain-the-length
   \newcounter{totalNumberOfDepartments}
@@ -211,14 +221,10 @@
   \large Submitted to the faculty of the University Graduate School\\
   in partial fulfillment of the requirements\\ for the degree\\
   Doctor of Philosophy\\ in \dolistloop{\departmentList}
-  Indiana University\\ \@date \par
-
+  Indiana University\\ \@monthGranted\ \@yearGranted \par
 }
-\vskip 60\p@
-\end{center}
-%\@thanks
-\vfil\null
- \end{titlepage}%
+\pagenumbering{roman}\setcounter{page}\@ne
+\end{centeredHorizontallyAndVertically}%
   \setcounter{footnote}{0}%
   \global\let\thanks\relax
   \global\let\maketitle\relax
@@ -286,19 +292,6 @@
 \fi
 %%%%%End maketitle Definition
 
-%centeredpage
-\newenvironment{centeredpage}
-    {%
-      \if@twocolumn
-        \@restonecoltrue\onecolumn
-      \else
-        \@restonecolfalse\newpage
-      \fi
-    }%
-    {
-    \if@restonecol\twocolumn \else \newpage \fi
-    }
-
 %%%%Begin Acceptance Page Definition
 \newcommand*{\committeeMember}[1]{\listadd{\committeeMembersList}{#1}}
 % https://tex.stackexchange.com/questions/231055/how-can-i-create-a-list-as-a-variable-that-can-be-appended-and-eventually-typese
@@ -332,22 +325,9 @@ Doctoral Committee
 %%%%End Acceptance Page Definition
                         
 %%%%Begin Copyright Page Definition
-\newcommand*{\@cryear}{}
-\newcommand*{\cryear}[1]{\renewcommand*{\@cryear}{#1}}
-
-\newenvironment{centeredHorizontallyAndVertically}{
- \begin{centeredpage}%
- \null\vfill
- \begin{center}
-}{
- \end{center}
- \vfill\null
- \end{centeredpage}%
-}
-
 \newcommand\copyrightpage{
 \begin{centeredHorizontallyAndVertically}
-Copyright \copyright\ \@cryear\\ %set to use \@Year
+Copyright \copyright\ \@yearGranted\\ %set to use \@Year
      \begin{tabular}[t]{c}
         \@author
       \end{tabular}%\par
@@ -551,14 +531,12 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 \newcommand{\addContentsChapterWithoutPagenumber}[1]{\addtocontents{toc}{\contentsline{chapter}{\MakeTextUppercase{#1}}{}}}
 
 \if@titlepage
-  \newenvironment{abstract}{\begin{centeredpage}%
-\chapter*{\@author\protect \\
-\MakeTextUppercase{\@title}}%
-}
-{
-\@committee
-  \end{centeredpage}% 
+  \newenvironment{abstract}{\begin{centeredpage}
+    \begin{center}
+      {\large \@author \vfill \MakeTextUppercase{\@title} \vfill}
+    \end{center}
   }
+  {\@committee \end{centeredpage}}
 \else
   \newenvironment{abstract}{%
       \if@twocolumn
@@ -630,16 +608,6 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
                {\endlist}
 
 %%%%Page Environment Definitions%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%titlepage
-\newenvironment{titlepage}
-    {%
-      \begin{centeredpage}%
-      \thispagestyle{empty}%
-      \pagenumbering{roman}
-      \setcounter{page}\@ne
-    }%
-    {\end{centeredpage}}
 
 %dedication
 \newenvironment{dedication}{\begin{centeredHorizontallyAndVertically}}{\end{centeredHorizontallyAndVertically}}
