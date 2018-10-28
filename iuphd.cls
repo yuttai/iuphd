@@ -533,7 +533,7 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
 \if@titlepage
   \newenvironment{abstract}{\begin{centeredpage}
     \begin{center}
-      {\large \@author \vfill \MakeTextUppercase{\@title} \vfill}
+      {\large \par \vfill \@author \vfill \MakeTextUppercase{\@title} \vfill}
     \end{center}
   }
   {\@committee \end{centeredpage}}
