@@ -188,8 +188,8 @@
   {\if@restonecol \twocolumn \else \newpage \fi}
 
 \newenvironment{centeredHorizontallyAndVertically}
-  {\begin{centeredpage}\null\vfill\begin{center}}
-  {\end{center}\vfill\null\end{centeredpage}}
+  {\begin{centeredpage}\vspace*{\fill}\begin{center}}
+  {\end{center}\vspace*{\fill}\end{centeredpage}}
 
 \newcommand*{\@monthGranted}{}
 \newcommand*{\monthGranted}[1]{\renewcommand*{\@monthGranted}{#1}}
@@ -297,14 +297,10 @@
 % https://tex.stackexchange.com/questions/231055/how-can-i-create-a-list-as-a-variable-that-can-be-appended-and-eventually-typese
 \RequirePackage{setspace}
 \newcommand{\@committee}{
-  {
-    \par
+  \begin{flushright}
     \setstretch{1}
-    \begin{flushright}
-      \forlistloop{\vfill\rule{0.5\textwidth}{0.4pt} \\ }{\committeeMembersList}
-      \vfill\par
-    \end{flushright}
-  }
+    ~ \forlistloop{\\[\fill] \rule{0.5\textwidth}{0.4pt} \\ }{\committeeMembersList} \\[\fill]
+  \end{flushright}
 }
 \newcommand*{\@defensedate}{}
 \newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
@@ -533,7 +529,7 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
 \if@titlepage
   \newenvironment{abstract}{\begin{centeredpage}
     \begin{center}
-      {\large \par \vfill \@author \vfill \MakeTextUppercase{\@title} \vfill}
+      {\large \vspace*{\fill} \@author \vfill \MakeTextUppercase{\@title} \vspace*{\fill}}
     \end{center}
   }
   {\@committee \end{centeredpage}}
