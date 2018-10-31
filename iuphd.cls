@@ -299,7 +299,7 @@
 \newcommand{\@committee}{
   \begin{flushright}
     \setstretch{1}
-    ~ \forlistloop{\\[\fill] \rule{0.5\textwidth}{0.4pt} \\ }{\committeeMembersList} \\[\fill]
+    \forlistloop{~ \\ ~ \\ ~ \\*[\fill] \rule{0.5\textwidth}{0.4pt} \\* }{\committeeMembersList} \\[\fill]
   \end{flushright}
 }
 \newcommand*{\@defensedate}{}
@@ -422,38 +422,36 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
                       \@makechapterhead{#2}%
                       \@afterheading
                     \fi}
-\def\@makechapterhead#1{%
+\RequirePackage{xparse}
+\NewDocumentCommand{\@makechapterheadspace}{o m}{%
   \vspace*{50\p@}%
   {
   %\parindent \z@ \raggedright
   \centering
   \normalfont
-    \ifnum \c@secnumdepth >\m@ne
-        \large\bfseries \@chapapp\space \thechapter
+    \IfNoValueF{#1}{
+        \large #1
         \par\nobreak
         \vskip 20\p@
-    \fi
+    }
     \interlinepenalty\@M
-    \large \bfseries \MakeTextUppercase{#1}\par\nobreak
+    \large \MakeTextUppercase{#2}\par\nobreak
     \vskip 40\p@
   }}
+\def\@makechapterhead#1{%
+    \ifnum \c@secnumdepth >\m@ne
+      \@makechapterheadspace[\bfseries \@chapapp\space \thechapter]{\bfseries #1}
+    \else
+      \@makechapterheadspace{\bfseries #1}
+    \fi
+  }
 \def\@schapter#1{\if@twocolumn
                    \@topnewpage[\@makeschapterhead{#1}]%
                  \else
                    \@makeschapterhead{#1}%
                    \@afterheading
                  \fi}
-\def\@makeschapterhead#1{%
-  \vspace*{50\p@}%
-  {
-  %\parindent \z@ \raggedright
-    \centering
-    \normalfont
-    \interlinepenalty\@M
-    \large \bfseries \MakeTextUppercase{#1}\par\nobreak
-
-    \vskip 40\p@
-  }}
+\def\@makeschapterhead#1{\@makechapterheadspace{\bfseries #1}}
 \newcommand\section{\@startsection {section}{1}{\z@}%
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
                                    {2.3ex \@plus.2ex}%
@@ -527,12 +525,9 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
 \newcommand{\addContentsChapterWithoutPagenumber}[1]{\addtocontents{toc}{\contentsline{chapter}{\MakeTextUppercase{#1}}{}}}
 
 \if@titlepage
-  \newenvironment{abstract}{\begin{centeredpage}
-    \begin{center}
-      {\large \vspace*{\fill} \@author \vfill \MakeTextUppercase{\@title} \vspace*{\fill}}
-    \end{center}
-  }
-  {\@committee \end{centeredpage}}
+  \newenvironment{abstract}
+    {\begin{centeredpage} \@makechapterheadspace[\@author]{\@title}}
+    {\bigbreak \@committee \end{centeredpage}}
 \else
   \newenvironment{abstract}{%
       \if@twocolumn
