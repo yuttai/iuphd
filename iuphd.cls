@@ -296,15 +296,18 @@
 \newcommand*{\committeeMember}[1]{\listadd{\committeeMembersList}{#1}}
 % https://tex.stackexchange.com/questions/231055/how-can-i-create-a-list-as-a-variable-that-can-be-appended-and-eventually-typese
 \RequirePackage{setspace}
-\newcommand{\@committee}{
+\RequirePackage{xparse}
+\NewDocumentCommand{\@committee}{O{\fill}}{
   \begin{flushright}
     \setstretch{1}
-    \forlistloop{~ \\ ~ \\ ~ \\*[\fill] \rule{0.5\textwidth}{0.4pt} \\* }{\committeeMembersList} \\[\fill]
+    \renewcommand{\do}[1]{~ \\*[#1] \rule{0.5\textwidth}{0.4pt} \\* ##1 \\}
+    \dolistloop{\committeeMembersList}
+    ~ \\[#1]
   \end{flushright}
 }
 \newcommand*{\@defensedate}{}
 \newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
-\newcommand*{\acceptancepage}{\begin{centeredpage}%
+\NewDocumentCommand{\acceptancepage}{O{\fill}}{\begin{centeredpage}%
 \vspace{-0.5\baselineskip}
 \begin{center}
  Accepted by the Graduate Faculty, Indiana University, in partial fulfillment
@@ -312,7 +315,7 @@
 \end{center}
 Doctoral Committee
 
-\@committee
+\@committee[#1]
 
 \@defensedate\par
 \end{centeredpage}%
@@ -422,7 +425,6 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
                       \@makechapterhead{#2}%
                       \@afterheading
                     \fi}
-\RequirePackage{xparse}
 \NewDocumentCommand{\@makechapterheadspace}{o m}{%
   \vspace*{50\p@}%
   {
@@ -525,9 +527,9 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
 \newcommand{\addContentsChapterWithoutPagenumber}[1]{\addtocontents{toc}{\contentsline{chapter}{\MakeTextUppercase{#1}}{}}}
 
 \if@titlepage
-  \newenvironment{abstract}
+  \NewDocumentEnvironment{abstract}{O{\fill}}
     {\begin{centeredpage} \@makechapterheadspace[\@author]{\@title}}
-    {\bigbreak \@committee \end{centeredpage}}
+    {\@committee[#1] \end{centeredpage}}
 \else
   \newenvironment{abstract}{%
       \if@twocolumn
@@ -542,7 +544,9 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
       {\if@twocolumn\else\endquotation\fi}
 \fi
 
-\newenvironment{abstract*}{\clearpageAddContentsChapter{\abstractname}\begin{abstract}}{\end{abstract}}
+\NewDocumentEnvironment{abstract*}{O{\fill}}
+  {\clearpageAddContentsChapter{\abstractname}\begin{abstract}[#1]}
+  {\end{abstract}}
 %%%%End abstract Definition
 
 \let\tempone\itemize

@@ -97,6 +97,14 @@ In my dissertation.tex sample file, we use \code{datetime2} and \code{datetime2-
 Additionally the commands \code{\textbackslash acceptancepage} and \code{\textbackslash copyrightpage} have been defined to generate the acceptance page and copyright page
 respectively.  The copyright page is not required, so it has been commented out of my dissertation.tex sample file.
 
+Also, the command \code{\textbackslash acceptancepage} and the \code{abstract}
+environment takes an optional argument to specify the space for committee
+signatures. When the committee signatures are all in the same page, the default
+values are \code{\textbackslash fill} looks good. However, \code{\textbackslash
+fill} cannot distribute space evenly when they are in the different pages. In
+this case, \code{\textbackslash bigskipamount} or \code{\textbackslash
+lineskip} might be appropriate.
+
 A CV is also required following the bibliography, however, to maintain maximum flexibility I have not provided any special tools for
 formatting a CV.  Various packages are available that do this, although I prefer custom formatting. As such, I have provided only a
 line for including the CV after the bibliography, which is currently commented out.
