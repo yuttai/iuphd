@@ -90,7 +90,7 @@
 
 \setlength\lineskip{1\p@}
 \setlength\normallineskip{1\p@}
-\renewcommand\baselinestretch{1.9} %sets double spacing
+\usepackage[doublespacing]{setspace}  %use this package to set linespacing as desired
 \setlength\parskip{0\p@ \@plus \p@}
 \@lowpenalty   51
 \@medpenalty  151
@@ -179,8 +179,6 @@
   \fi
   \@xsect{#5}}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
-
- \renewcommand*\arraystretch{.8} %prevents double spacing in matrices and other arrays
 
 %centeredpage
 \newenvironment{centeredpage}
@@ -295,7 +293,6 @@
 %%%%Begin Acceptance Page Definition
 \newcommand*{\committeeMember}[1]{\listadd{\committeeMembersList}{#1}}
 % https://tex.stackexchange.com/questions/231055/how-can-i-create-a-list-as-a-variable-that-can-be-appended-and-eventually-typese
-\RequirePackage{setspace}
 \RequirePackage{xparse}
 \NewDocumentCommand{\@committee}{O{\fill}}{
   \begin{flushright}
