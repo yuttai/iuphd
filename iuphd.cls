@@ -518,7 +518,8 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
 %%%%Begin abstract Definition
 
 % Put \clearpage before \addcontentsline to make sure the page number is correct.
-\newcommand{\clearpageAddContentsChapter}[1]{\clearpage{}\addcontentsline{toc}{chapter}{\MakeTextUppercase{#1}}}
+\newcommand{\clearpageAddContents}[2]{\clearpage{}\addcontentsline{toc}{#1}{\MakeTextUppercase{#2}}}
+\newcommand{\clearpageAddContentsChapter}[1]{\clearpageAddContents{chapter}{#1}}
 % http://latex.org/forum/viewtopic.php?t=7312
 % http://latex.org/forum/viewtopic.php?t=17956
 \newcommand{\addContentsChapterWithoutPagenumber}[1]{\addtocontents{toc}{\contentsline{chapter}{\MakeTextUppercase{#1}}{}}}

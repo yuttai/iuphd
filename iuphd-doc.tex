@@ -70,10 +70,15 @@ both the abstract and the preface in the table of contents, but not the dedicati
 \end{verbatim}
 To include a line for the bibliography in the table of contents, the command
 \begin{verbatim}
-\clearpageAddContentsChapter{Bibliography}
+\clearpageAddContents{chapter}{Bibliography}
 \end{verbatim}
 should be placed directly above the \code{\textbackslash bibliography} and \code{\textbackslash bibliographystyle} commands,
 where a \code{\textbackslash clearpage} is placed before adding a new content line to get the page number displayed in the contents correctly.
+If we want to put a bibliography for each section, the \code{chapter} should be replaced by \code{section}, and write like:
+\begin{verbatim}
+\clearpageAddContents{section}{Bibliography}
+\end{verbatim}
+and the precise code for adding a bibliography for each section can be seen in \code{https://git.io/fhj8U}, \code{https://git.io/fhj8I}, and \code{https://git.io/fhj8q} if you use \code{biblatex} package.
 Since the curriculum vitae should not have a page number, the command including the curriculum vitae is different from the one including the bibliography
 \begin{verbatim}
 \addContentsChapterWithoutPagenumber{Curriculum Vitae}
