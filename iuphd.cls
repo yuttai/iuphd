@@ -1,6 +1,37 @@
+% This file is NOT part of the LaTeX base system but is a modified
+% version of the file report.cls from the LaTex base system.  It has
+% been modified to attempt to conform to the IU Thesis requirements.
+% It does not always meet those requirements so plan to submit your
+% thesis in plenty of time to make corrections.
+%
+% See https://www.latex-project.org/get/ for information on how to get
+% the LaTeX base system.  The current version of the file report.cls
+% is available through the CTAN archive, for example, from this url
+%
+% https://www.tug.org/svn/texlive/trunk/Master/texmf-dist/tex/latex/base/report.cls?view=co
+%
+%% The LaTeX base system is covered by the LaTeX Project Public License.
+%% It may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%    https://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%
+% The changes between the file report.cls and the current file are in
+% the public domain.
+%
+% This file is unmaintained.  
+%   Do not send bug reports to the LaTeX Project.
+%
+% You can send bug reports to mathdgs@indiana.edu but they are likely
+% to be ignored.
+% 
+
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{iuphd}
-              [2013/01/18 LaTeX document class for IU dissertations]
+              [2019/03/18 LaTeX document class for IU dissertations. Conformance to requirements not guaranteed; submit your thesis early enough to have time to make corrections! ]
 \newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
@@ -24,7 +55,7 @@
 \newif\if@dedication
 \DeclareOption{showdedication}{\@dedicationtrue}
 \DeclareOption{hidededication}{\@dedicationfalse}
-%see addtions to execute options below
+%see additions to execute options below
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \if@compatibility\else
@@ -95,9 +126,9 @@
 \ProcessOptions
 \input{size1\@ptsize.clo}
  %% Page layout
-\setlength\textwidth{6in}
+\setlength\textwidth{6.5in}
 \setlength\textheight{9in}
-\setlength\oddsidemargin{0.5in}
+\setlength\oddsidemargin{0in}
 \setlength\evensidemargin{0in}
 \setlength\topmargin{0in}
 \setlength\headheight{0in}
@@ -127,13 +158,13 @@
       \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
       \let\@mkboth\markboth
     \def\chaptermark##1{%
-      \markboth {\MakeUppercase{%
+      \markboth {{%
         \ifnum \c@secnumdepth >\m@ne
             \@chapapp\ \thechapter. \ %
         \fi
         ##1}}{}}%
     \def\sectionmark##1{%
-      \markright {\MakeUppercase{%
+      \markright {{%
         \ifnum \c@secnumdepth >\z@
           \thesection. \ %
         \fi
@@ -144,7 +175,7 @@
     \def\@oddhead{{\slshape\rightmark}\hfil\thepage}%
     \let\@mkboth\markboth
     \def\chaptermark##1{%
-      \markright {\MakeUppercase{%
+      \markright {{%
         \ifnum \c@secnumdepth >\m@ne
             \@chapapp\ \thechapter. \ %
         \fi
@@ -160,7 +191,7 @@
     }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%this redefines \@sect (contained in latex.ltx) so that sections, subsections, etc. are displayed in the TOC with all caps.
+%%%%this redefines \@sect (contained in latex.ltx) so that sections, subsections, etc. are displayed in the TOC.
 \def\@sect#1#2#3#4#5#6[#7]#8{%
   \ifnum #2>\c@secnumdepth
     \let\@svsec\@empty
@@ -180,7 +211,7 @@
       \ifnum #2>\c@secnumdepth \else
         \protect\numberline{\csname the#1\endcsname}%
       \fi
-      \MakeTextUppercase{#7}}%
+      {#7}}%
   \else
     \def\@svsechd{%
       #6{\hskip #3\relax
@@ -190,7 +221,7 @@
         \ifnum #2>\c@secnumdepth \else
           \protect\numberline{\csname the#1\endcsname}%
         \fi
-        \MakeTextUppercase{#7}}}%
+        {#7}}}%
   \fi
   \@xsect{#5}}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
@@ -209,18 +240,19 @@
 \null\vfil
 \begin{center}
 \vskip 60\p@
-{\huge \MakeTextUppercase{\@title} \par}
-\vskip 3em
-{\LARGE
+{\large \par
+\MakeTextUppercase{\@title} \par}
+\vfill
+{\large
     \begin{tabular}[t]{c}
 	 \@author
      \end{tabular}\par}
 \vfill
-{\large Submitted to the faculty of the University Graduate School\\
+{Submitted to the faculty of the University Graduate School\\
 in partial fulfillment of the requirements\\ for the degree\\ 
 Doctor of Philosophy\\ in the \if@school School \else Department \fi of \@department,\\
 Indiana University\\ \@date \par}
-\vskip 60\p@
+\vskip 30\p@
 \end{center}
 %\@thanks
 \vfil\null
@@ -319,29 +351,37 @@ Indiana University\\ \@date \par}
 \newcommand*{\@defensedate}{}
 \newcommand*{\defensedate}[1]{\renewcommand*{\@defensedate}{#1}}
 
-\newcommand\acceptancepage{\begin{centeredpage}%
-\vspace{-0.5\baselineskip}
+\newcommand\acceptancepage{
+\newpage
+%
 \begin{center}
  Accepted by the Graduate Faculty, Indiana University, in partial fulfillment
  of the requirements for the degree of Doctor of Philosophy.\par
 \end{center}
+
 Doctoral Committee
-\vspace{3\baselineskip}
+\vspace{2\baselineskip}
 
+\hspace{\fill}\line(1,0){240}\par
+\vspace{-0.5\baselineskip}
 \hfill \@committeechair
-\vspace{3\baselineskip}
+\vspace{1.5\baselineskip}
 
+\hspace{\fill}\line(1,0){240}\par
+\vspace{-0.5\baselineskip}
 \hfill \@readertwo
-\vspace{3\baselineskip}
+\vspace{1.5\baselineskip}
 
+\hspace{\fill}\line(1,0){240}\par
+\vspace{-0.5\baselineskip}
 \hfill \@readerthree
-\vspace{3\baselineskip}
+\vspace{1.5\baselineskip}
 
+\hspace{\fill}\line(1,0){240}\par
+\vspace{-0.5\baselineskip}
 \hfill \@readerfour
-\vspace{3\baselineskip}
 
 \@defensedate\par
-\end{centeredpage}%
   \global\let\committeechair\relax
   \global\let\readertwo\relax
   \global\let\readerthree\relax
@@ -403,9 +443,9 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 \def\@part[#1]#2{%
     \ifnum \c@secnumdepth >-2\relax
       \refstepcounter{part}%
-      \addcontentsline{toc}{part}{\thepart\hspace{1em}\MakeTextUppercase{#1}}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}{#1}}%
     \else
-      \addcontentsline{toc}{part}{\MakeTextUppercase{#1}}%
+      \addcontentsline{toc}{part}{{#1}}%
     \fi
     \markboth{}{}%
     {\centering
@@ -416,13 +456,13 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
        \par
        \vskip 20\p@
      \fi
-     \Huge \bfseries \MakeTextUppercase{#2}\par}%
+     \Huge \bfseries {#2}\par}%
     \@endpart}
 \def\@spart#1{%
     {\centering
      \interlinepenalty \@M
      \normalfont
-     \Huge \bfseries \MakeTextUppercase{#1}\par}%
+     \Huge \bfseries {#1}\par}%
     \@endpart}
 \def\@endpart{\vfil\newpage
               \if@twoside
@@ -444,9 +484,9 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
                          \refstepcounter{chapter}%
                          \typeout{\@chapapp\space\thechapter.}%
                          \addcontentsline{toc}{chapter}%
-                                   {\protect\numberline{\thechapter}\MakeTextUppercase{#1}}%
+                                   {\protect\numberline{\thechapter}{#1}}%
                     \else
-                      \addcontentsline{toc}{chapter}{\MakeTextUppercase{#1}}%
+                      \addcontentsline{toc}{chapter}{{#1}}%
                     \fi
                     \chaptermark{#1}%
                     \addtocontents{lof}{\protect\addvspace{10\p@}}%
@@ -458,19 +498,18 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
                       \@afterheading
                     \fi}
 \def\@makechapterhead#1{%
-  \vspace*{50\p@}%
   {
   %\parindent \z@ \raggedright
   \centering
   \normalfont
     \ifnum \c@secnumdepth >\m@ne
-        \LARGE\bfseries \@chapapp\space \thechapter
+        \normalsize\bfseries \@chapapp\space \thechapter
         \par\nobreak
         \vskip 20\p@
     \fi
     \interlinepenalty\@M
-    \huge \bfseries \MakeTextUppercase{#1}\par\nobreak
-    \vskip 40\p@
+    \normalsize \bfseries {#1}\par\nobreak
+    \vskip 20\p@
   }}
 \def\@schapter#1{\if@twocolumn
                    \@topnewpage[\@makeschapterhead{#1}]%
@@ -479,36 +518,35 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
                    \@afterheading
                  \fi}
 \def\@makeschapterhead#1{%
-  \vspace*{50\p@}%
   {
   %\parindent \z@ \raggedright
     \centering
     \normalfont
     \interlinepenalty\@M
-    \huge \bfseries \MakeTextUppercase{#1}\par\nobreak
+    \normalsize \bfseries {#1}\par\nobreak
 
-    \vskip 40\p@
+    \vskip 20\p@
   }}
 \newcommand\section{\@startsection {section}{1}{\z@}%
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
                                    {2.3ex \@plus.2ex}%
-                                   {\normalfont\Large\bfseries\MakeTextUppercase}}
+                                   {\normalfont\normalsize\bfseries}}
 \newcommand\subsection{\@startsection{subsection}{2}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
-                                     {\normalfont\large\bfseries\MakeTextUppercase}}
+                                     {\normalfont\normalsize\bfseries}}
 \newcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
-                                     {\normalfont\normalsize\bfseries\MakeTextUppercase}}
+                                     {\normalfont\normalsize\bfseries}}
 \newcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
                                     {3.25ex \@plus1ex \@minus.2ex}%
                                     {-1em}%
-                                    {\normalfont\normalsize\bfseries\MakeTextUppercase}}
+                                    {\normalfont\normalsize\bfseries}}
 \newcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
                                        {3.25ex \@plus1ex \@minus .2ex}%
                                        {-1em}%
-                                      {\normalfont\normalsize\bfseries\MakeTextUppercase}}
+                                      {\normalfont\normalsize\bfseries}}
 \if@twocolumn
   \setlength\leftmargini  {2em}
 \else
@@ -555,23 +593,40 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 
 %%%%Begin abstract Definition
 \if@titlepage
-  \newenvironment{abstract}{\begin{centeredpage}%
+  \newenvironment{abstract}{%
+ \newpage
  \if@abstract
-    \addcontentsline{toc}{chapter}{ABSTRACT}
+    \addcontentsline{toc}{chapter}{Abstract}
  \else
  \fi
- \vspace{-\baselineskip}
-  \begin{center}
-{\LARGE\@author\par}
- \vspace{20\p@}
- 
-{\huge\MakeTextUppercase{\@title}\par}
- \vspace{20\p@}
+\begin{center}
+{\@author\par}
+%
+%\vspace{-0.5\baselineskip}
+{\MakeTextUppercase{\@title}\par}
 \end{center}
 \raggedright
 }
 {
-  \end{centeredpage}% 
+\par
+\hspace{\fill}\line(1,0){240}\par
+\vspace{-0.5\baselineskip}
+\hfill \@committeechair
+\vspace{1.5\baselineskip}
+
+\hspace{\fill}\line(1,0){240}\par
+\vspace{-0.5\baselineskip}
+\hfill \@readertwo
+\vspace{1.5\baselineskip}
+
+\hspace{\fill}\line(1,0){240}\par
+\vspace{-0.5\baselineskip}
+\hfill \@readerthree
+\vspace{1.5\baselineskip}
+
+\hspace{\fill}\line(1,0){240}\par
+\vspace{-0.5\baselineskip}
+\hfill \@readerfour 
   }
 \else
   \newenvironment{abstract}{%
@@ -580,9 +635,8 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
       \else
         \small
         \begin{center}%
-          {\bfseries \abstractname\vspace{-.5em}\vspace{\z@}}%
+          {\bfseries \abstractname}%
         \end{center}%
-        \quotation
       \fi}
       {\if@twocolumn\else\endquotation\fi}
 \fi
@@ -666,13 +720,17 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
       \else
         \@restonecolfalse\newpage
       \fi
-      \chapter*{DEDICATION}
+      \chapter*{}
       \if@dedication
-      \addcontentsline{toc}{chapter}{DEDICATION}
+      \addcontentsline{toc}{chapter}{Dedication}
       \else
       \fi
+      \begin{centeredpage}
+      \begin{center}
     }%
     {
+    \end{center}
+    \end{centeredpage}
     \if@restonecol\twocolumn \else \newpage \fi
     }
 
@@ -684,9 +742,9 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
       \else
         \@restonecolfalse\newpage
       \fi
-      \chapter*{ACKNOWLEDGMENTS}
+      \chapter*{Acknowledgments}
       \if@acknowledgments
-      \addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}
+      \addcontentsline{toc}{chapter}{Acknowledgments}
       \else
       \fi
     }%
@@ -702,9 +760,9 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
       \else
         \@restonecolfalse\newpage
       \fi
-      \chapter*{PREFACE}
+      \chapter*{Preface}
        \if@preface
-       \addcontentsline{toc}{chapter}{PREFACE}
+       \addcontentsline{toc}{chapter}{Preface}
        \else
        \fi
     }%
@@ -717,7 +775,8 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
   \setcounter{chapter}{0}%
   \setcounter{section}{0}%
   \gdef\@chapapp{\appendixname}%
-  \gdef\thechapter{\@Alph\c@chapter}}
+  \gdef\thechapter{\@Alph\c@chapter}%
+  }
 \setlength\arraycolsep{5\p@}
 \setlength\tabcolsep{6\p@}
 \setlength\arrayrulewidth{.4\p@}
@@ -790,7 +849,7 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
     \fi
     \chapter*{\contentsname
         \@mkboth{%
-           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+           \contentsname}{\contentsname}}%
     \@starttoc{toc}%
     \if@restonecol\twocolumn\fi
     \clearpage
@@ -806,7 +865,9 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
       {\leavevmode
-       \large \bfseries #1\hfil \hb@xt@\@pnumwidth{\hss #2}}\par
+       \large \bfseries #1\hfil 
+       \hb@xt@\@pnumwidth{\hss #2%
+                          \kern-\p@\kern\p@}}\par
        \nobreak
          \global\@nobreaktrue
          \everypar{\global\@nobreakfalse\everypar{}}%
@@ -823,7 +884,9 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
       \leavevmode \bfseries
       \advance\leftskip\@tempdima
       \hskip -\leftskip
-      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      #1\nobreak\hfil 
+      \nobreak\hb@xt@\@pnumwidth{\hss #2%
+                                 \kern-\p@\kern\p@}\par
       \penalty\@highpenalty
     \endgroup
   \fi}
@@ -839,8 +902,8 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
       \@restonecolfalse
     \fi
     \chapter*{\listfigurename}%
-      \@mkboth{\MakeUppercase\listfigurename}%
-              {\MakeUppercase\listfigurename}%
+      \@mkboth{\listfigurename}%
+              {\listfigurename}%
     \@starttoc{lof}%
     \if@restonecol\twocolumn\fi
     }
@@ -853,8 +916,8 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
     \fi
     \chapter*{\listtablename}%
       \@mkboth{%
-          \MakeUppercase\listtablename}%
-         {\MakeUppercase\listtablename}%
+          \listtablename}%
+         {\listtablename}%
     \@starttoc{lot}%
     \if@restonecol\twocolumn\fi
     }
@@ -863,7 +926,7 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 \setlength\bibindent{1.5em}
 \newenvironment{thebibliography}[1]
      {\chapter*{\bibname}%
-      \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+      \@mkboth{\bibname}{\bibname}%
       \list{\@biblabel{\@arabic\c@enumiv}}%
            {\settowidth\labelwidth{\@biblabel{#1}}%
             \leftmargin\labelwidth
@@ -889,8 +952,8 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
                   \@restonecoltrue
                 \fi
                 \twocolumn[\@makeschapterhead{\indexname}]%
-                \@mkboth{\MakeUppercase\indexname}%
-                        {\MakeUppercase\indexname}%
+                \@mkboth{\indexname}%
+                        {\indexname}%
                 \thispagestyle{plain}\parindent\z@
                 \parskip\z@ \@plus .3\p@\relax
                 \columnseprule \z@
@@ -910,17 +973,17 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
     \parindent 1em%
     \noindent
     \hb@xt@1.8em{\hss\@makefnmark}#1}
-\newcommand\contentsname{CONTENTS}
-\newcommand\listfigurename{LIST OF FIGURES}
-\newcommand\listtablename{LIST OF TABLES}
-\newcommand\bibname{BIBLIOGRAPHY}
-\newcommand\indexname{INDEX}
+\newcommand\contentsname{Contents}
+\newcommand\listfigurename{List of Figures}
+\newcommand\listtablename{List of Tables}
+\newcommand\bibname{Bibliography}
+\newcommand\indexname{Index}
 \newcommand\figurename{Figure}
 \newcommand\tablename{Table}
-\newcommand\partname{PART}
-\newcommand\chaptername{CHAPTER}
-\newcommand\appendixname{APPENDIX}
-\newcommand\abstractname{ABASTRACT}
+\newcommand\partname{Part}
+\newcommand\chaptername{Chapter}
+\newcommand\appendixname{Appendix}
+\newcommand\abstractname{Abstract}
 \def\today{\ifcase\month\or
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi
@@ -942,4 +1005,4 @@ Copyright \copyright\ \@cryear\\ %set to use \@Year
 \fi
 \endinput
 %%
-%% End of file `report.cls'.
+%% End of file `iuphd.cls'.
