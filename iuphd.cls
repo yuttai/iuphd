@@ -165,7 +165,7 @@
       \ifnum #2>\c@secnumdepth \else
         \protect\numberline{\csname the#1\endcsname}%
       \fi
-      \MakeTextUppercase{#7}}%
+      #7}%
   \else
     \def\@svsechd{%
       #6{\hskip #3\relax
@@ -175,7 +175,7 @@
         \ifnum #2>\c@secnumdepth \else
           \protect\numberline{\csname the#1\endcsname}%
         \fi
-        \MakeTextUppercase{#7}}}%
+        #7}}%
   \fi
   \@xsect{#5}}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
@@ -368,9 +368,9 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
 \def\@part[#1]#2{%
     \ifnum \c@secnumdepth >-2\relax
       \refstepcounter{part}%
-      \addcontentsline{toc}{part}{\thepart\hspace{1em}\MakeTextUppercase{#1}}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
     \else
-      \addcontentsline{toc}{part}{\MakeTextUppercase{#1}}%
+      \addcontentsline{toc}{part}{#1}%
     \fi
     \markboth{}{}%
     {\centering
@@ -409,9 +409,9 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
                          \refstepcounter{chapter}%
                          \typeout{\@chapapp\space\thechapter.}%
                          \addcontentsline{toc}{chapter}%
-                                   {\protect\numberline{\thechapter}\MakeTextUppercase{#1}}%
+                                   {\protect\numberline{\thechapter}#1}%
                     \else
-                      \addcontentsline{toc}{chapter}{\MakeTextUppercase{#1}}%
+                      \addcontentsline{toc}{chapter}{#1}%
                     \fi
                     \chaptermark{#1}%
                     \addtocontents{lof}{\protect\addvspace{10\p@}}%
@@ -518,11 +518,11 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
 %%%%Begin abstract Definition
 
 % Put \clearpage before \addcontentsline to make sure the page number is correct.
-\newcommand{\clearpageAddContents}[2]{\clearpage{}\addcontentsline{toc}{#1}{\MakeTextUppercase{#2}}}
+\newcommand{\clearpageAddContents}[2]{\clearpage{}\addcontentsline{toc}{#1}{#2}}
 \newcommand{\clearpageAddContentsChapter}[1]{\clearpageAddContents{chapter}{#1}}
 % http://latex.org/forum/viewtopic.php?t=7312
 % http://latex.org/forum/viewtopic.php?t=17956
-\newcommand{\addContentsChapterWithoutPagenumber}[1]{\addtocontents{toc}{\contentsline{chapter}{\MakeTextUppercase{#1}}{}}}
+\newcommand{\addContentsChapterWithoutPagenumber}[1]{\addtocontents{toc}{\contentsline{chapter}{#1}{}}}
 
 \if@titlepage
   \NewDocumentEnvironment{abstract}{O{\fill}}
@@ -604,15 +604,15 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
 
 %dedication
 \newenvironment{dedication}{\begin{centeredHorizontallyAndVertically}}{\end{centeredHorizontallyAndVertically}}
-\newenvironment{dedication*}{\clearpageAddContentsChapter{dedication}\begin{dedication}}{\end{dedication}}
+\newenvironment{dedication*}{\clearpageAddContentsChapter{Dedication}\begin{dedication}}{\end{dedication}}
 
 %acknowledgments
 \newenvironment{acknowledgments}{\begin{centeredpage}\chapter*{ACKNOWLEDGMENTS}}{\end{centeredpage}}
-\newenvironment{acknowledgments*}{\clearpageAddContentsChapter{acknowledgments}\begin{acknowledgments}}{\end{acknowledgments}}
+\newenvironment{acknowledgments*}{\clearpageAddContentsChapter{Acknowledgments}\begin{acknowledgments}}{\end{acknowledgments}}
 
 %preface
 \newenvironment{preface}{\begin{centeredpage}\chapter*{PREFACE}}{\end{centeredpage}}
-\newenvironment{preface*}{\clearpageAddContentsChapter{preface}\begin{preface}}{\end{preface}}
+\newenvironment{preface*}{\clearpageAddContentsChapter{Preface}\begin{preface}}{\end{preface}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
 \newcommand\appendix{\par
@@ -809,7 +809,7 @@ Copyright \copyright\ \@yearGranted\\ %set to use \@Year
 \newcommand\partname{PART}
 \newcommand\chaptername{CHAPTER}
 \newcommand\appendixname{APPENDIX}
-\newcommand\abstractname{ABASTRACT}
+\newcommand\abstractname{Abstract}
 \def\today{\ifcase\month\or
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi
